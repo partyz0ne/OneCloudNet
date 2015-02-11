@@ -1,8 +1,6 @@
 # **OneCloudNet**
 .Net client for 1cloud.ru service REST API.
 
-.NET wrapper for the Firebase REST API.
-
 ####Installation (NuGet)
 ```csharp
 Install-Package OneCloudNet
