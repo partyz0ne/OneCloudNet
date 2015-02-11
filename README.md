@@ -41,6 +41,7 @@ Boolean DeleteServer(Int32 serverID);
 Action PowerServer(Int32 serverID, Power type);
 IEnumerable<Action> GetActions(Int32 serverID);
 Action GetAction(Int32 serverID, Int32 actionID);
+```
 
 More features and documentation are coming soon.
 
