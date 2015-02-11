@@ -60,6 +60,7 @@
     <Compile Include="Client\IOneCloudNetClient.cs" />
     <Compile Include="Client\Async.cs" />
     <Compile Include="Client\Sync.cs" />
+    <Compile Include="Enums\Power.cs" />
     <Compile Include="Exceptions\OneCloudException.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="Models\Action.cs" />

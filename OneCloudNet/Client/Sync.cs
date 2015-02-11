@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using OneCloudNet.Enums;
 using OneCloudNet.Models;
 using Action = OneCloudNet.Models.Action;
 
@@ -49,9 +50,9 @@ namespace OneCloudNet.Client
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public Action PowerServer(Int32 serverID, String type)
+        public Action PowerServer(Int32 serverID, Power type)
         {
-            var request = _requestHelper.CreatePowerServerRequest(serverID, type);
+            var request = _requestHelper.CreatePowerServerRequest(serverID, type.ToString());
 
             return Execute<Action>(request);
         }

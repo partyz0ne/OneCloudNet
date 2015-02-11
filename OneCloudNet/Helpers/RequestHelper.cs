@@ -18,7 +18,7 @@ namespace OneCloudNet.Helpers
         public RestRequest CreateGetImagesRequest()
         {
             var request = new RestRequest(Method.GET);
-            request.Resource = "/Image";
+            request.Resource = "/image";
             request.AddHeader("Authorization", "Bearer " + _token);
 
             return request;
@@ -48,6 +48,7 @@ namespace OneCloudNet.Helpers
             request.Resource = "/server";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("Name", name);
+            CheckServerParams(ref cpu, ref ram, ref hdd);
             request.AddParameter("CPU", cpu);
             request.AddParameter("RAM", ram);
             request.AddParameter("HDD", hdd);
@@ -61,6 +62,7 @@ namespace OneCloudNet.Helpers
             request.Resource = "/server/{id}";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            CheckServerParams(ref cpu, ref ram, ref hdd);
             request.AddParameter("CPU", cpu);
             request.AddParameter("RAM", ram);
             request.AddParameter("HDD", hdd);
@@ -78,7 +80,7 @@ namespace OneCloudNet.Helpers
 
         public IRestRequest CreatePowerServerRequest(Int32 serverID, String type)
         {
-            var request = new RestRequest(Method.PUT);
+            var request = new RestRequest(Method.POST);
             request.Resource = "/server/{id}/action";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("id", serverID, ParameterType.UrlSegment);
@@ -103,6 +105,24 @@ namespace OneCloudNet.Helpers
             request.AddParameter("id", serverID, ParameterType.UrlSegment);
             request.AddParameter("actionID", actionID, ParameterType.UrlSegment);
             return request;
+        }
+
+        private static void CheckServerParams(ref Int32 cpu, ref Int32 ram, ref Int32 hdd)
+        {
+            if (cpu < 1)
+                cpu = 1;
+            else if (cpu > 8)
+                cpu = 8;
+
+            if (ram < 512)
+                ram = 512;
+            else if (ram > 16384)
+                ram = 16384;
+
+            if (hdd < 10)
+                hdd = 10;
+            else if (hdd > 250)
+                hdd = 250;
         }
     }
 }

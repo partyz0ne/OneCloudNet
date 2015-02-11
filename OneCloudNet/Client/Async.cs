@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using OneCloudNet.Enums;
 using OneCloudNet.Exceptions;
 using OneCloudNet.Models;
 using Action = OneCloudNet.Models.Action;
+using IRestResponse = RestSharp.IRestResponse;
 
 namespace OneCloudNet.Client
 {
@@ -38,15 +40,15 @@ namespace OneCloudNet.Client
             ExecuteAsync(request, success, failure);
         }
 
-        public void DeleteServer(Int32 serverID, Action<Boolean> success, Action<OneCloudException> failure)
+        public void DeleteServer(Int32 serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteServerRequest(serverID);
             ExecuteAsync(request, success, failure);
         }
 
-        public void PowerServer(Int32 serverID, String type, Action<Action> success, Action<OneCloudException> failure)
+        public void PowerServer(Int32 serverID, Power type, Action<Action> success, Action<OneCloudException> failure)
         {
-            var request = _requestHelper.CreatePowerServerRequest(serverID, type);
+            var request = _requestHelper.CreatePowerServerRequest(serverID, type.ToString());
             ExecuteAsync(request, success, failure);
         }
 

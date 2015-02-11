@@ -9,13 +9,29 @@ namespace OneCloudNet.Client
 {
     public partial class OneCloudNetClient : IOneCloudNetClient
     {
+        /// <summary>
+        /// Base URL for API requests.
+        /// </summary>
         private const String ApiBaseUrl = "https://api.1cloud.ru";
 
+        /// <summary>
+        /// Unique private API token for authorization.
+        /// </summary>
         private readonly String _token;
 
+        /// <summary>
+        /// Client for REST-communications.
+        /// </summary>
         private RestClient _restClient;
+
+        /// <summary>
+        /// Helper for creating REST-requests.
+        /// </summary>
         private RequestHelper _requestHelper;
 
+        /// <summary>
+        /// Proxy settings.
+        /// </summary>
         public IWebProxy Proxy { get; set; }
 
         /// <summary>
@@ -26,8 +42,8 @@ namespace OneCloudNet.Client
         public OneCloudNetClient(String token, IWebProxy proxy = null)
         {
             Proxy = proxy;
-            LoadClient();
             _token = token;
+            LoadClient();
         }
 
         private void LoadClient()
