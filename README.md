@@ -1,6 +1,8 @@
 # **OneCloudNet**
 .Net client for 1cloud.ru service REST API.
 
+[![NuGet](https://img.shields.io/nuget/dt/onecloudnet.svg)](http://nuget.org/packages/OneCloudNet)
+
 ####Installation (NuGet)
 ```csharp
 Install-Package OneCloudNet
