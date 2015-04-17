@@ -9,11 +9,59 @@ namespace OneCloudNet.Client
 {
     public partial class OneCloudNetClient
     {
+        #region Images
+
         public IEnumerable<Image> GetImages()
         {
             var request = _requestHelper.CreateGetImagesRequest();
             return Execute<List<Image>>(request);
         }
+
+        public Image CreateImage(String name, String techName, Int32 serverID)
+        {
+            var request = _requestHelper.CreateCreateImageRequest(name, techName, serverID);
+            return Execute<Image>(request);
+        }
+
+        public Boolean DeleteImage(Int32 imageID)
+        {
+            var request = _requestHelper.CreateDeleteImageRequest(imageID);
+            var response = Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        #endregion
+
+        #region Private networks
+
+        public IEnumerable<Network> GetNetworks()
+        {
+            var request = _requestHelper.CreateGetNetworksRequest();
+            return Execute<List<Network>>(request);
+        }
+
+        public Network GetNetwork(Int32 networkID)
+        {
+            var request = _requestHelper.CreateGetNetworkRequest(networkID);
+            return Execute<Network>(request);
+        }
+
+        public Network CreateNetwork(String name)
+        {
+            var request = _requestHelper.CreateCreateNetworkRequest(name);
+            return Execute<Network>(request);
+        }
+
+        public Boolean DeleteNetwork(Int32 networkID)
+        {
+            var request = _requestHelper.CreateDeleteNetworkRequest(networkID);
+            var response = Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        #endregion
+
+        #region Servers
 
         public IEnumerable<Server> GetServers()
         {
@@ -70,5 +118,7 @@ namespace OneCloudNet.Client
 
             return Execute<Action>(request);
         }
+
+        #endregion
     }
 }

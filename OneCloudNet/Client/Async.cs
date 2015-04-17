@@ -10,11 +10,57 @@ namespace OneCloudNet.Client
 {
     public partial class OneCloudNetClient
     {
+        #region Images
+
         public void GetImages(Action<List<Image>> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetImagesRequest();
             ExecuteAsync(request, success, failure);
         }
+
+        public void CreateImage(String name, String techName, Int32 serverID, Action<Image> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateCreateImageRequest(name, techName, serverID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        public void DeleteImage(Int32 imageID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateDeleteImageRequest(imageID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        #endregion
+
+        #region Private networks
+
+        public void GetNetworks(Action<List<Network>> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetNetworksRequest();
+            ExecuteAsync(request, success, failure);
+        }
+
+        public void GetNetwork(Int32 networkID, Action<Network> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetNetworkRequest(networkID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        public void CreateNetwork(String name, Action<Network> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateCreateNetworkRequest(name);
+            ExecuteAsync(request, success, failure);
+        }
+
+        public void DeleteNetwork(Int32 networkID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateDeleteNetworkRequest(networkID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        #endregion
+
+        #region Servers
 
         public void GetServers(Action<List<Server>> success, Action<OneCloudException> failure)
         {
@@ -63,5 +109,7 @@ namespace OneCloudNet.Client
             var request = _requestHelper.CreateGetActionRequest(serverID, actionID);
             ExecuteAsync(request, success, failure);
         }
+
+        #endregion
     }
 }

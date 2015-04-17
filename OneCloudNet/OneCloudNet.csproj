@@ -65,6 +65,7 @@
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Network.cs" />
     <Compile Include="Models\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

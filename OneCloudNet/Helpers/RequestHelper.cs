@@ -8,12 +8,22 @@ namespace OneCloudNet.Helpers
     /// </summary>
     public class RequestHelper
     {
+        #region Fields
+
         private readonly String _token;
+
+        #endregion
+
+        #region .ctor
 
         public RequestHelper(String token)
         {
             _token = token;
         }
+
+        #endregion
+
+        #region Images
 
         public RestRequest CreateGetImagesRequest()
         {
@@ -23,6 +33,71 @@ namespace OneCloudNet.Helpers
 
             return request;
         }
+
+        public RestRequest CreateCreateImageRequest(String name, String techName, Int32 serverID)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/image";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("Name", name);
+            request.AddParameter("TechName", techName);
+            request.AddParameter("ServerID", serverID);
+
+            return request;
+        }
+
+        public RestRequest CreateDeleteImageRequest(Int32 imageID)
+        {
+            var request = new RestRequest(Method.DELETE);
+            request.Resource = "/image/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", imageID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        #endregion
+
+        #region Private networks
+
+        public RestRequest CreateGetNetworksRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/network";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        public IRestRequest CreateGetNetworkRequest(Int32 networkID)
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/network/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", networkID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        public IRestRequest CreateCreateNetworkRequest(String name)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/network";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("Name", name);
+            return request;
+        }
+
+        public IRestRequest CreateDeleteNetworkRequest(Int32 networkID)
+        {
+            var request = new RestRequest(Method.DELETE);
+            request.Resource = "/network/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", networkID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        #endregion
+
+        #region Servers
 
         public RestRequest CreateGetServersRequest()
         {
@@ -124,5 +199,7 @@ namespace OneCloudNet.Helpers
             else if (hdd > 250)
                 hdd = 250;
         }
+
+        #endregion
     }
 }

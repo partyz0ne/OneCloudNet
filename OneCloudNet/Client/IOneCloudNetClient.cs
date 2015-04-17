@@ -11,12 +11,18 @@ namespace OneCloudNet.Client
 {
     public interface IOneCloudNetClient
     {
+        #region Properties
+
         /// <summary>
         /// Proxy settings.
         /// </summary>
         IWebProxy Proxy { get; set; }
 
+        #endregion
+
         #region Asynchronious requests
+
+        #region Images
 
         /// <summary>
         /// Get list of images.
@@ -24,6 +30,61 @@ namespace OneCloudNet.Client
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
         void GetImages(Action<List<Image>> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create server image.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        /// <param name="name">User-defined image name.</param>
+        /// <param name="techName">Technical image name (only latin symbols and digits).</param>
+        /// <param name="serverID">Server ID.</param>
+        void CreateImage(String name, String techName, Int32 serverID, Action<Image> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Delete image.
+        /// </summary>
+        /// <param name="imageID">Image ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void DeleteImage(Int32 imageID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        #endregion
+
+        #region Private networks
+
+        /// <summary>
+        /// Get list of networks.
+        /// </summary>
+        void GetNetworks(Action<List<Network>> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Get network info by ID.
+        /// </summary>
+        /// <param name="networkID">Network unique ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void GetNetwork(Int32 networkID, Action<Network> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create new network.
+        /// </summary>
+        /// <param name="name">Network name.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateNetwork(String name, Action<Network> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Delete network.
+        /// </summary>
+        /// <param name="networkID">Network ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void DeleteNetwork(Int32 networkID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        #endregion
+
+        #region Servers
 
         /// <summary>
         /// Get list of servers.
@@ -99,13 +160,68 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #endregion
+
         #region Synchronious requests
+
+        #region Images
 
         /// <summary>
         /// Get list of images.
         /// </summary>
         /// <returns>List of images.</returns>
         IEnumerable<Image> GetImages();
+
+        /// <summary>
+        /// Create server image.
+        /// </summary>
+        /// <param name="name">User-defined image name.</param>
+        /// <param name="techName">Technical image name (only latin symbols and digits).</param>
+        /// <param name="serverID">Server ID.</param>
+        /// <returns>Created image.</returns>
+        Image CreateImage(String name, String techName, Int32 serverID);
+
+        /// <summary>
+        /// Delete image.
+        /// </summary>
+        /// <param name="imageID">Image ID.</param>
+        /// <returns>Result of operation.</returns>
+        Boolean DeleteImage(Int32 imageID);
+
+        #endregion
+
+        #region Private networks
+
+        /// <summary>
+        /// Get list of networks.
+        /// </summary>
+        /// <returns>List of networks.</returns>
+        IEnumerable<Network> GetNetworks();
+
+        /// <summary>
+        /// Get network info by ID.
+        /// </summary>
+        /// <param name="networkID">Network unique ID.</param>
+        /// <returns>Network information.</returns>
+        Network GetNetwork(Int32 networkID);
+
+        /// <summary>
+        /// Create new network.
+        /// </summary>
+        /// <param name="name">Network name.</param>
+        /// <returns>Created network information.</returns>
+        Network CreateNetwork(String name);
+
+        /// <summary>
+        /// Delete network.
+        /// </summary>
+        /// <param name="networkID">Network ID.</param>
+        /// <returns>Result of operation.</returns>
+        Boolean DeleteNetwork(Int32 networkID);
+
+        #endregion
+
+        #region Servers
 
         /// <summary>
         /// Get list of servers.
@@ -170,6 +286,8 @@ namespace OneCloudNet.Client
         /// <param name="actionID">Action ID.</param>
         /// <returns>Action information.</returns>
         Action GetAction(Int32 serverID, Int32 actionID);
+
+        #endregion
 
         #endregion
     }
