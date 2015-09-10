@@ -92,7 +92,7 @@ namespace OneCloudNet.Client
         }
 
         private void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<OneCloudException> failure)
-            where T : new()
+            //where T : new()
         {
             _restClient.ExecuteAsync<T>(request, (response, asynchandle) =>
             {

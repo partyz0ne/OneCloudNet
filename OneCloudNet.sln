@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCloudNet", "OneCloudNet\OneCloudNet.csproj", "{E9580EFC-6014-4D3B-82A8-5F6D57213CE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCloudNet.Sample", "OneCloudNet.Sample\OneCloudNet.Sample.csproj", "{A3D21261-8DF1-403C-A41D-4FF7357E9102}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

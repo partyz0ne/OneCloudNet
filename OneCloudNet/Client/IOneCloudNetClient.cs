@@ -22,6 +22,16 @@ namespace OneCloudNet.Client
 
         #region Asynchronious requests
 
+        #region Customer
+
+        /// <summary>
+        /// Get account balance.
+        /// </summary>
+        /// <returns>Current balance.</returns>
+        void Balance(Action<String> success, Action<OneCloudException> failure);
+
+        #endregion
+
         #region Images
 
         /// <summary>
@@ -160,9 +170,121 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #region Domains
+
+        /// <summary>
+        /// Get list of domains.
+        /// </summary>
+        /// <returns>List of servers.</returns>
+        void GetDomains(Action<List<Domain>> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Get server info by ID.
+        /// </summary>
+        /// <param name="domainID">Domain unique ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void GetDomain(Int32 domainID, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create new domain.
+        /// </summary>
+        /// <param name="name">Domain name.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateDomain(String name, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Delete domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void DeleteDomain(Int32 domainID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateARecord(Int32 domainID, String ip, String name, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateAAAARecord(Int32 domainID, String ip, String name, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Canonical name or @ symbol.</param>
+        /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="hostname">Domain name.</param>
+        /// <param name="priority">Record priority.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateMXRecord(Int32 domainID, String hostname, String priority, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateNSRecord(Int32 domainID, String name, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="text">Text.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateTXTRecord(Int32 domainID, String name, String text, Action<Domain> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Delete record for domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="recordID">Record ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void DeleteRecord(Int32 domainID, Int32 recordID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        #endregion
+
         #endregion
 
         #region Synchronious requests
+
+        #region Customer
+
+        /// <summary>
+        /// Get account balance.
+        /// </summary>
+        /// <returns>Current balance.</returns>
+        String Balance();
+
+        #endregion
 
         #region Images
 
@@ -286,6 +408,98 @@ namespace OneCloudNet.Client
         /// <param name="actionID">Action ID.</param>
         /// <returns>Action information.</returns>
         Action GetAction(Int32 serverID, Int32 actionID);
+
+        #endregion
+
+        #region Domains
+
+        /// <summary>
+        /// Get list of domains.
+        /// </summary>
+        /// <returns>List of servers.</returns>
+        IEnumerable<Domain> GetDomains();
+
+        /// <summary>
+        /// Get server info by ID.
+        /// </summary>
+        /// <param name="domainID">Domain unique ID.</param>
+        /// <returns>Server information.</returns>
+        Domain GetDomain(Int32 domainID);
+
+        /// <summary>
+        /// Create new domain.
+        /// </summary>
+        /// <param name="name">Domain name.</param>
+        /// <returns>Created domain information.</returns>
+        Domain CreateDomain(String name);
+
+        /// <summary>
+        /// Delete domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <returns>Result of operation.</returns>
+        Boolean DeleteDomain(Int32 domainID);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <returns></returns>
+        Domain CreateARecord(Int32 domainID, String ip, String name);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <returns></returns>
+        Domain CreateAAAARecord(Int32 domainID, String ip, String name);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Canonical name or @ symbol.</param>
+        /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <returns></returns>
+        Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="hostname">Domain name.</param>
+        /// <param name="priority">Record priority.</param>
+        /// <returns></returns>
+        Domain CreateMXRecord(Int32 domainID, String hostname, String priority);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name.</param>
+        /// <returns></returns>
+        Domain CreateNSRecord(Int32 domainID, String name);
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="text">Text.</param>
+        /// <returns></returns>
+        Domain CreateTXTRecord(Int32 domainID, String name, String text);
+
+        /// <summary>
+        /// Delete record for domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="recordID">Record ID.</param>
+        /// <returns>Result of operation.</returns>
+        Boolean DeleteRecord(Int32 domainID, Int32 recordID);
 
         #endregion
 

@@ -9,6 +9,20 @@ namespace OneCloudNet.Client
 {
     public partial class OneCloudNetClient
     {
+        #region Customer
+
+        /// <summary>
+        /// Get account balance.
+        /// </summary>
+        /// <returns>Current balance.</returns>
+        public String Balance()
+        {
+            var request = _requestHelper.CreateBalanceRequest();
+            return Execute(request).Content.Replace("\"", "");
+        }
+
+        #endregion
+
         #region Images
 
         public IEnumerable<Image> GetImages()
@@ -117,6 +131,147 @@ namespace OneCloudNet.Client
             var request = _requestHelper.CreateGetActionRequest(serverID, actionID);
 
             return Execute<Action>(request);
+        }
+
+        #endregion
+
+        #region Domains
+
+        /// <summary>
+        /// Get list of domains.
+        /// </summary>
+        /// <returns>List of servers.</returns>
+        public IEnumerable<Domain> GetDomains()
+        {
+            var request = _requestHelper.CreateGetDomainsRequest();
+
+            return Execute<List<Domain>>(request);
+        }
+
+        /// <summary>
+        /// Get server info by ID.
+        /// </summary>
+        /// <param name="domainID">Domain unique ID.</param>
+        /// <returns>Server information.</returns>
+        public Domain GetDomain(Int32 domainID)
+        {
+            var request = _requestHelper.CreateGetDomainRequest(domainID);
+
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create new domain.
+        /// </summary>
+        /// <param name="name">Domain name.</param>
+        /// <returns>Created domain information.</returns>
+        public Domain CreateDomain(String name)
+        {
+            var request = _requestHelper.CreateCreateDomainRequest(name);
+
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Delete domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <returns>Result of operation.</returns>
+        public Boolean DeleteDomain(Int32 domainID)
+        {
+            var request = _requestHelper.CreateDeleteDomainRequest(domainID);
+            var response = Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <returns></returns>
+        public Domain CreateARecord(Int32 domainID, String ip, String name)
+        {
+            var request = _requestHelper.CreateCreateARecordRequest(domainID, ip, name);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <returns></returns>
+        public Domain CreateAAAARecord(Int32 domainID, String ip, String name)
+        {
+            var request = _requestHelper.CreateCreateAAAARecordRequest(domainID, ip, name);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Canonical name or @ symbol.</param>
+        /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <returns></returns>
+        public Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName)
+        {
+            var request = _requestHelper.CreateCreateCNAMERecordRequest(domainID, name, mnemonicName);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="hostname">Domain name.</param>
+        /// <param name="priority">Record priority.</param>
+        /// <returns></returns>
+        public Domain CreateMXRecord(Int32 domainID, String hostname, String priority)
+        {
+            var request = _requestHelper.CreateCreateMXRecordRequest(domainID, hostname, priority);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name.</param>
+        /// <returns></returns>
+        public Domain CreateNSRecord(Int32 domainID, String name)
+        {
+            var request = _requestHelper.CreateCreateNSRecordRequest(domainID, name);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Create A-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="text">Text.</param>
+        /// <returns></returns>
+        public Domain CreateTXTRecord(Int32 domainID, String name, String text)
+        {
+            var request = _requestHelper.CreateCreateTXTRecordRequest(domainID, name, text);
+            return Execute<Domain>(request);
+        }
+
+        /// <summary>
+        /// Delete record for domain.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="recordID">Record ID.</param>
+        /// <returns>Result of operation.</returns>
+        public Boolean DeleteRecord(Int32 domainID, Int32 recordID)
+        {
+            var request = _requestHelper.CreateDeleteRecordRequest(domainID, recordID);
+            var response = Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         #endregion

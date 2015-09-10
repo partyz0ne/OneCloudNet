@@ -6,7 +6,7 @@ namespace OneCloudNet.Helpers
     /// <summary>
     /// Helper class for creating OneCloudNet RestSharp Requests
     /// </summary>
-    public class RequestHelper
+    public partial class RequestHelper
     {
         #region Fields
 
@@ -198,6 +198,19 @@ namespace OneCloudNet.Helpers
                 hdd = 10;
             else if (hdd > 250)
                 hdd = 250;
+        }
+
+        #endregion
+
+        #region Customer
+
+        public IRestRequest CreateBalanceRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/customer/balance";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
         }
 
         #endregion
