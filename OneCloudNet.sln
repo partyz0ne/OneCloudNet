@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCloudNet", "OneCloudNet\OneCloudNet.csproj", "{E9580EFC-6014-4D3B-82A8-5F6D57213CE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneCloudNet.Sample", "OneCloudNet.Sample\OneCloudNet.Sample.csproj", "{A3D21261-8DF1-403C-A41D-4FF7357E9102}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,16 +25,6 @@ Global
 		{E9580EFC-6014-4D3B-82A8-5F6D57213CE4}.Release|ARM.ActiveCfg = Release|Any CPU
 		{E9580EFC-6014-4D3B-82A8-5F6D57213CE4}.Release|x64.ActiveCfg = Release|Any CPU
 		{E9580EFC-6014-4D3B-82A8-5F6D57213CE4}.Release|x86.ActiveCfg = Release|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Release|ARM.ActiveCfg = Release|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Release|x64.ActiveCfg = Release|Any CPU
-		{A3D21261-8DF1-403C-A41D-4FF7357E9102}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
