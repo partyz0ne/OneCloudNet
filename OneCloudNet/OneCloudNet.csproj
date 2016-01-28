@@ -66,6 +66,7 @@
     <Compile Include="Helpers\RequestHelper.Domains.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DC.cs" />
     <Compile Include="Models\Domain.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Network.cs" />

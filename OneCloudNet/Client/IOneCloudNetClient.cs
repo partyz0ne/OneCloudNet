@@ -94,6 +94,17 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #region Data centers
+
+        /// <summary>
+        /// Get list of all available DCs.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void GetDCs(Action<List<DC>> success, Action<OneCloudException> failure);
+
+        #endregion
+
         #region Servers
 
         /// <summary>
@@ -340,6 +351,16 @@ namespace OneCloudNet.Client
         /// <param name="networkID">Network ID.</param>
         /// <returns>Result of operation.</returns>
         Boolean DeleteNetwork(Int32 networkID);
+
+        #endregion
+
+        #region Data centers
+
+        /// <summary>
+        /// Get list of all available DCs.
+        /// </summary>
+        /// <returns>List of DCs.</returns>
+        IEnumerable<DC> GetDCs();
 
         #endregion
 

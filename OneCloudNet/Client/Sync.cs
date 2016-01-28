@@ -75,6 +75,17 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #region DC
+
+        public IEnumerable<DC> GetDCs()
+        {
+            var request = _requestHelper.CreateGetDCsRequest();
+
+            return Execute<List<DC>>(request);
+        }
+
+        #endregion
+
         #region Servers
 
         public IEnumerable<Server> GetServers()

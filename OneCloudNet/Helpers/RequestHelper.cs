@@ -214,5 +214,18 @@ namespace OneCloudNet.Helpers
         }
 
         #endregion
+
+        #region DC
+
+        public IRestRequest CreateGetDCsRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/dcLocation";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        #endregion
     }
 }

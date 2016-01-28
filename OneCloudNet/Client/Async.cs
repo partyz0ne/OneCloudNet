@@ -114,6 +114,21 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #region DC
+
+        /// <summary>
+        /// Get list of all available DCs.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        public void GetDCs(Action<List<DC>> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetDCsRequest();
+            ExecuteAsync(request, success, failure);
+        }
+
+        #endregion
+
         #region Servers
 
         /// <summary>
