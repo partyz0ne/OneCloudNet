@@ -5,6 +5,11 @@ namespace OneCloudNet.Models
     public class DC
     {
         /// <summary>
+        /// Unique identifier.
+        /// </summary>
+        public Int32 ID { get; set; }
+
+        /// <summary>
         /// Technical name.
         /// </summary>
         public String TechTitle { get; set; }

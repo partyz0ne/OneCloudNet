@@ -43,7 +43,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateARecordRequest(Int32 domainID, String ip, String name)
+        public IRestRequest CreateCreateARecordRequest(Int32 domainID, String ip, String name, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recorda";
@@ -51,10 +51,11 @@ namespace OneCloudNet.Helpers
             request.AddParameter("DomainId", domainID);
             request.AddParameter("IP", ip);
             request.AddParameter("Name", name);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
-        public IRestRequest CreateCreateAAAARecordRequest(Int32 domainID, String ip, String name)
+        public IRestRequest CreateCreateAAAARecordRequest(Int32 domainID, String ip, String name, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordaaaa";
@@ -62,10 +63,11 @@ namespace OneCloudNet.Helpers
             request.AddParameter("DomainId", domainID);
             request.AddParameter("IP", ip);
             request.AddParameter("Name", name);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
-        public IRestRequest CreateCreateCNAMERecordRequest(Int32 domainID, String name, String mnemonicName)
+        public IRestRequest CreateCreateCNAMERecordRequest(Int32 domainID, String name, String mnemonicName, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordcname";
@@ -73,31 +75,35 @@ namespace OneCloudNet.Helpers
             request.AddParameter("DomainId", domainID);
             request.AddParameter("Name", name);
             request.AddParameter("MnemonicName", mnemonicName);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
-        public IRestRequest CreateCreateMXRecordRequest(Int32 domainID, String hostName, String priority)
+        public IRestRequest CreateCreateMXRecordRequest(Int32 domainID, String hostname, String priority, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordmx";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("DomainId", domainID);
-            request.AddParameter("HostName", hostName);
+            request.AddParameter("HostName", hostname);
             request.AddParameter("Priority", priority);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
-        public IRestRequest CreateCreateNSRecordRequest(Int32 domainID, String name)
+        public IRestRequest CreateCreateNSRecordRequest(Int32 domainID, String hostname, String name, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordns";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("DomainId", domainID);
+            request.AddParameter("HostName", hostname);
             request.AddParameter("Name", name);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
-        public IRestRequest CreateCreateTXTRecordRequest(Int32 domainID, String hostName, String text)
+        public IRestRequest CreateCreateTXTRecordRequest(Int32 domainID, String hostName, String text, String ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordtxt";
@@ -105,6 +111,7 @@ namespace OneCloudNet.Helpers
             request.AddParameter("DomainId", domainID);
             request.AddParameter("HostName", hostName);
             request.AddParameter("Text", text);
+            request.AddParameter("TTL", ttl);
             return request;
         }
 
@@ -117,7 +124,24 @@ namespace OneCloudNet.Helpers
             request.AddParameter("recordId", recordID, ParameterType.UrlSegment);
             return request;
         }
-        
+
+        public IRestRequest CreateCreateSRVRecordRequest(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/dns/recordtxt";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("DomainId", domainID);
+            request.AddParameter("Service", service);
+            request.AddParameter("Proto", proto);
+            request.AddParameter("Name", name);
+            request.AddParameter("Priority", priority);
+            request.AddParameter("Weight", weight);
+            request.AddParameter("Port", port);
+            request.AddParameter("Target", target);
+            request.AddParameter("TTL", ttl);
+            return request;
+        }
+
         #endregion
     }
 }

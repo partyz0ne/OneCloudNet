@@ -117,7 +117,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateServerRequest(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID)
+        public IRestRequest CreateCreateServerRequest(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/server";
@@ -128,10 +128,13 @@ namespace OneCloudNet.Helpers
             request.AddParameter("RAM", ram);
             request.AddParameter("HDD", hdd);
             request.AddParameter("ImageID", imageID);
+            request.AddParameter("HDDType", hddType);
+            request.AddParameter("isHighPerformance", isHighPerformance);
+            request.AddParameter("DCLocation", dcLocation);
             return request;
         }
 
-        public IRestRequest CreateChangeServerRequest(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd)
+        public IRestRequest CreateChangeServerRequest(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance)
         {
             var request = new RestRequest(Method.PUT);
             request.Resource = "/server/{id}";
@@ -141,6 +144,8 @@ namespace OneCloudNet.Helpers
             request.AddParameter("CPU", cpu);
             request.AddParameter("RAM", ram);
             request.AddParameter("HDD", hdd);
+            request.AddParameter("HDDType", hddType);
+            request.AddParameter("isHighPerformance", isHighPerformance);
             return request;
         }
 
@@ -160,6 +165,17 @@ namespace OneCloudNet.Helpers
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("id", serverID, ParameterType.UrlSegment);
             request.AddParameter("Type", type);
+            return request;
+        }
+
+        public IRestRequest CreateServerNetworkRequest(Int32 serverID, String type, Int32? networkID)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/server/{id}/action";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            request.AddParameter("Type", type);
+            request.AddParameter("NetworkID", networkID);
             return request;
         }
 

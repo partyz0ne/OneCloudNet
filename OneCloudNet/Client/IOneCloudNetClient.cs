@@ -130,9 +130,12 @@ namespace OneCloudNet.Client
         /// <param name="ram">Volume of RAM (Mb).</param>
         /// <param name="hdd">Hard disk space (Gb).</param>
         /// <param name="imageID">Initial image ID.</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
+        /// <param name="dcLocation">Data center technical title.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, Action<Server> success, Action<OneCloudException> failure);
+        void CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation, Action<Server> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Change server configuration.
@@ -141,9 +144,11 @@ namespace OneCloudNet.Client
         /// <param name="cpu">Number of CPU.</param>
         /// <param name="ram">Volume of RAM (Mb).</param>
         /// <param name="hdd">Hard disk space (Gb).</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, Action<Action> success, Action<OneCloudException> failure);
+        void ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance, Action<Action> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Delete server.
@@ -161,6 +166,16 @@ namespace OneCloudNet.Client
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
         void PowerServer(Int32 serverID, Power type, Action<Action> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Action for connecting/disconnecting server network.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="type">Type of action.</param>
+        /// <param name="networkID">Private network ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void ServerNetwork(Int32 serverID, NetworkAction type, Int32? networkID, Action<Action> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Get list of active actions for server.
@@ -219,9 +234,10 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateARecord(Int32 domainID, String ip, String name, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateARecord(Int32 domainID, String ip, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Create A-record.
@@ -229,9 +245,10 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateAAAARecord(Int32 domainID, String ip, String name, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateAAAARecord(Int32 domainID, String ip, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Create A-record.
@@ -239,9 +256,10 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="name">Canonical name or @ symbol.</param>
         /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Create A-record.
@@ -249,28 +267,32 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="hostname">Domain name.</param>
         /// <param name="priority">Record priority.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateMXRecord(Int32 domainID, String hostname, String priority, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateMXRecord(Int32 domainID, String hostname, String priority, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="name">Domain name.</param>
+        /// <param name="hostName">Domain name or @ symbol.</param>
+        /// <param name="name">Domain name of NS-server.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateNSRecord(Int32 domainID, String name, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateNSRecord(Int32 domainID, String hostName, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="hostName">Domain name or @ symbol.</param>
         /// <param name="text">Text.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        void CreateTXTRecord(Int32 domainID, String name, String text, Action<Domain> success, Action<OneCloudException> failure);
+        void CreateTXTRecord(Int32 domainID, String hostName, String text, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         /// <summary>
         /// Delete record for domain.
@@ -280,6 +302,22 @@ namespace OneCloudNet.Client
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
         void DeleteRecord(Int32 domainID, Int32 recordID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create SRV-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="service">Service name.</param>
+        /// <param name="proto">Used protocol.</param>
+        /// <param name="name">Domain name.</param>
+        /// <param name="priority">Target host priority.</param>
+        /// <param name="weight">Record weight.</param>
+        /// <param name="port">Used port.</param>
+        /// <param name="target">Canonical computer name of service.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateSRVRecord(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl, Action<Domain> success, Action<OneCloudException> failure);
 
         #endregion
 
@@ -387,8 +425,11 @@ namespace OneCloudNet.Client
         /// <param name="ram">Volume of RAM (Mb).</param>
         /// <param name="hdd">Hard disk space (Gb).</param>
         /// <param name="imageID">Initial image ID.</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
+        /// <param name="dcLocation">Data center technical title.</param>
         /// <returns>Created server information.</returns>
-        Server CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID);
+        Server CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation);
 
         /// <summary>
         /// Change server configuration.
@@ -397,8 +438,10 @@ namespace OneCloudNet.Client
         /// <param name="cpu">Number of CPU.</param>
         /// <param name="ram">Volume of RAM (Mb).</param>
         /// <param name="hdd">Hard disk space (Gb).</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
         /// <returns>Action, caused by changing operation.</returns>
-        Action ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd);
+        Action ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance);
 
         /// <summary>
         /// Delete server.
@@ -415,6 +458,14 @@ namespace OneCloudNet.Client
         /// <returns>Action, caused by operation.</returns>
         Action PowerServer(Int32 serverID, Power type);
         
+        /// <summary>
+        /// Action for connecting/disconnecting server network.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="type">Type of action.</param>
+        /// <param name="networkID">Private network ID.</param>
+        Action ServerNetwork(Int32 serverID, NetworkAction type, Int32? networkID);
+
         /// <summary>
         /// Get list of active actions for server.
         /// </summary>
@@ -467,8 +518,9 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateARecord(Int32 domainID, String ip, String name);
+        Domain CreateARecord(Int32 domainID, String ip, String name, String ttl);
 
         /// <summary>
         /// Create A-record.
@@ -476,8 +528,9 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateAAAARecord(Int32 domainID, String ip, String name);
+        Domain CreateAAAARecord(Int32 domainID, String ip, String name, String ttl);
 
         /// <summary>
         /// Create A-record.
@@ -485,8 +538,9 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="name">Canonical name or @ symbol.</param>
         /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName);
+        Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, String ttl);
 
         /// <summary>
         /// Create A-record.
@@ -494,25 +548,29 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="hostname">Domain name.</param>
         /// <param name="priority">Record priority.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateMXRecord(Int32 domainID, String hostname, String priority);
+        Domain CreateMXRecord(Int32 domainID, String hostname, String priority, String ttl);
 
         /// <summary>
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="name">Domain name.</param>
+        /// <param name="hostName">Domain name or @ symbol.</param>
+        /// <param name="name">Domain name of NS-server.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateNSRecord(Int32 domainID, String name);
+        Domain CreateNSRecord(Int32 domainID, String hostName, String name, String ttl);
 
         /// <summary>
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="hostName">Domain name or @ symbol.</param>
         /// <param name="text">Text.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        Domain CreateTXTRecord(Int32 domainID, String name, String text);
+        Domain CreateTXTRecord(Int32 domainID,  String hostName, String text, String ttl);
 
         /// <summary>
         /// Delete record for domain.
@@ -521,6 +579,21 @@ namespace OneCloudNet.Client
         /// <param name="recordID">Record ID.</param>
         /// <returns>Result of operation.</returns>
         Boolean DeleteRecord(Int32 domainID, Int32 recordID);
+
+        /// <summary>
+        /// Create SRV-record.
+        /// </summary>
+        /// <param name="domainID">Domain ID.</param>
+        /// <param name="service">Service name.</param>
+        /// <param name="proto">Used protocol.</param>
+        /// <param name="name">Domain name.</param>
+        /// <param name="priority">Target host priority.</param>
+        /// <param name="weight">Record weight.</param>
+        /// <param name="port">Used port.</param>
+        /// <param name="target">Canonical computer name of service.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
+        /// <returns></returns>
+        Domain CreateSRVRecord(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl);
 
         #endregion
 

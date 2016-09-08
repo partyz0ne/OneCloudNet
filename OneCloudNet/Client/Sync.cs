@@ -102,16 +102,16 @@ namespace OneCloudNet.Client
             return Execute<Server>(request);
         }
 
-        public Server CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID)
+        public Server CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation)
         {
-            var request = _requestHelper.CreateCreateServerRequest(name, cpu, ram, hdd, imageID);
+            var request = _requestHelper.CreateCreateServerRequest(name, cpu, ram, hdd, imageID, hddType, isHighPerformance, dcLocation);
 
             return Execute<Server>(request);
         }
 
-        public Action ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd)
+        public Action ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance)
         {
-            var request = _requestHelper.CreateChangeServerRequest(serverID, cpu, ram, hdd);
+            var request = _requestHelper.CreateChangeServerRequest(serverID, cpu, ram, hdd, hddType, isHighPerformance);
 
             return Execute<Action>(request);
         }
@@ -126,6 +126,13 @@ namespace OneCloudNet.Client
         public Action PowerServer(Int32 serverID, Power type)
         {
             var request = _requestHelper.CreatePowerServerRequest(serverID, type.ToString());
+
+            return Execute<Action>(request);
+        }
+
+        public Action ServerNetwork(Int32 serverID, NetworkAction type, Int32? networkID)
+        {
+            var request = _requestHelper.CreateServerNetworkRequest(serverID, type.ToString(), networkID);
 
             return Execute<Action>(request);
         }
@@ -201,10 +208,11 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXX.XXX.XXX.XXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateARecord(Int32 domainID, String ip, String name)
+        public Domain CreateARecord(Int32 domainID, String ip, String name, String ttl)
         {
-            var request = _requestHelper.CreateCreateARecordRequest(domainID, ip, name);
+            var request = _requestHelper.CreateCreateARecordRequest(domainID, ip, name, ttl);
             return Execute<Domain>(request);
         }
 
@@ -214,10 +222,11 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="ip">IP-address in XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX format.</param>
         /// <param name="name">Domain name or @ symbol.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateAAAARecord(Int32 domainID, String ip, String name)
+        public Domain CreateAAAARecord(Int32 domainID, String ip, String name, String ttl)
         {
-            var request = _requestHelper.CreateCreateAAAARecordRequest(domainID, ip, name);
+            var request = _requestHelper.CreateCreateAAAARecordRequest(domainID, ip, name, ttl);
             return Execute<Domain>(request);
         }
 
@@ -227,10 +236,11 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="name">Canonical name or @ symbol.</param>
         /// <param name="mnemonicName">Mnemonic name.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName)
+        public Domain CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, String ttl)
         {
-            var request = _requestHelper.CreateCreateCNAMERecordRequest(domainID, name, mnemonicName);
+            var request = _requestHelper.CreateCreateCNAMERecordRequest(domainID, name, mnemonicName, ttl);
             return Execute<Domain>(request);
         }
 
@@ -238,12 +248,13 @@ namespace OneCloudNet.Client
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="hostname">Domain name.</param>
+        /// <param name="hostname">Domain name or @ symbol.</param>
         /// <param name="priority">Record priority.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateMXRecord(Int32 domainID, String hostname, String priority)
+        public Domain CreateMXRecord(Int32 domainID, String hostname, String priority, String ttl)
         {
-            var request = _requestHelper.CreateCreateMXRecordRequest(domainID, hostname, priority);
+            var request = _requestHelper.CreateCreateMXRecordRequest(domainID, hostname, priority, ttl);
             return Execute<Domain>(request);
         }
 
@@ -251,11 +262,13 @@ namespace OneCloudNet.Client
         /// Create A-record.
         /// </summary>
         /// <param name="domainID">Domain ID.</param>
-        /// <param name="name">Domain name.</param>
+        /// <param name="hostname">Domain name or @ symbol</param>
+        /// <param name="name">Domain name of NS-server.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateNSRecord(Int32 domainID, String name)
+        public Domain CreateNSRecord(Int32 domainID, String hostname, String name, String ttl)
         {
-            var request = _requestHelper.CreateCreateNSRecordRequest(domainID, name);
+            var request = _requestHelper.CreateCreateNSRecordRequest(domainID, hostname, name, ttl);
             return Execute<Domain>(request);
         }
 
@@ -265,10 +278,11 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="name">Domain name or @ symbol.</param>
         /// <param name="text">Text.</param>
+        /// <param name="ttl">Time to live (in seconds).</param>
         /// <returns></returns>
-        public Domain CreateTXTRecord(Int32 domainID, String name, String text)
+        public Domain CreateTXTRecord(Int32 domainID, String name, String text, String ttl)
         {
-            var request = _requestHelper.CreateCreateTXTRecordRequest(domainID, name, text);
+            var request = _requestHelper.CreateCreateTXTRecordRequest(domainID, name, text, ttl);
             return Execute<Domain>(request);
         }
 
@@ -283,6 +297,12 @@ namespace OneCloudNet.Client
             var request = _requestHelper.CreateDeleteRecordRequest(domainID, recordID);
             var response = Execute(request);
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public Domain CreateSRVRecord(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl)
+        {
+            var request = _requestHelper.CreateCreateSRVRecordRequest(domainID, service, proto, name, priority, weight, port, target, ttl);
+            return Execute<Domain>(request);
         }
 
         #endregion

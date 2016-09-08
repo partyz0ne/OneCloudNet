@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OneCloudNet.Models
 {
@@ -64,5 +65,53 @@ namespace OneCloudNet.Models
         /// Inital server image.
         /// </summary>
         public String Image { get; set; }
+
+        /// <summary>
+        /// True if server is in highperformance pool, false - in basic pool.
+        /// </summary>
+        public Boolean IsHighPerformance { get; set; }
+
+        /// <summary>
+        /// Type of server HDD ("SAS", "SSD").
+        /// </summary>
+        public String HDDType { get; set; }
+
+        /// <summary>
+        /// List of connected networks.
+        /// </summary>
+        public List<LinkedNetwork> LinkedNetworks { get; set; }
+
+        /// <summary>
+        /// Name of hosting data center.
+        /// </summary>
+        public String DCLocation { get; set; }
+
+        /// <summary>
+        /// Type of server OS.
+        /// </summary>
+        public String ImageFamily { get; set; }
+
+        public Server()
+        {
+            LinkedNetworks = new List<LinkedNetwork>();
+        }
+    }
+
+    public class LinkedNetwork
+    {
+        /// <summary>
+        /// Network ID.
+        /// </summary>
+        public Int32 NetworkID { get; set; }
+
+        /// <summary>
+        /// Server IP-address.
+        /// </summary>
+        public String IP { get; set; }
+
+        /// <summary>
+        /// Server MAC-address.
+        /// </summary>
+        public String MAC { get; set; }
     }
 }
