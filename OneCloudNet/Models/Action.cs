@@ -1,13 +1,13 @@
-﻿using System;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+
     public class Action
     {
         /// <summary>
         /// Unique action ID.
         /// </summary>
-        public Int32 ID { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// Action type. Can be one of these values:
@@ -17,7 +17,7 @@ namespace OneCloudNet.Models
         ///   PowerOff: server power off
         ///   PowerReboot: server reboot
         /// </summary>
-        public String Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Action state. Can be one of these values:
@@ -25,6 +25,6 @@ namespace OneCloudNet.Models
         /// Completed: action completed
         /// Postponed: action postponed
         /// </summary>
-        public String State { get; set; }
+        public string State { get; set; }
     }
 }

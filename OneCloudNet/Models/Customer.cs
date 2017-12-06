@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+
     public class Customer
     {
         /// <summary>
         /// Current billing balance.
         /// </summary>
-        public Double Balance { get; set; } 
+        public double Balance { get; set; } 
     }
 }

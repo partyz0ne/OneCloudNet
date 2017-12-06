@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using OneCloudNet.Enums;
-using OneCloudNet.Exceptions;
-using OneCloudNet.Models;
-using Action = OneCloudNet.Models.Action;
-using IRestResponse = RestSharp.IRestResponse;
-
-namespace OneCloudNet.Client
+﻿namespace OneCloudNet.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using OneCloudNet.Enums;
+    using OneCloudNet.Exceptions;
+    using OneCloudNet.Models;
+    using Action = OneCloudNet.Models.Action;
+    using IRestResponse = RestSharp.IRestResponse;
+
     public partial class OneCloudNetClient
     {
         #region Customer
@@ -16,7 +16,7 @@ namespace OneCloudNet.Client
         /// Get account balance.
         /// </summary>
         /// <returns>Current balance.</returns>
-        public void Balance(Action<String> success, Action<OneCloudException> failure)
+        public void Balance(Action<string> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateBalanceRequest();
             ExecuteAsync(request, success, failure);
@@ -45,7 +45,7 @@ namespace OneCloudNet.Client
         /// <param name="name">User-defined image name.</param>
         /// <param name="techName">Technical image name (only latin symbols and digits).</param>
         /// <param name="serverID">Server ID.</param>
-        public void CreateImage(String name, String techName, Int32 serverID, Action<Image> success, Action<OneCloudException> failure)
+        public void CreateImage(string name, string techName, int serverID, Action<Image> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateImageRequest(name, techName, serverID);
             ExecuteAsync(request, success, failure);
@@ -57,7 +57,7 @@ namespace OneCloudNet.Client
         /// <param name="imageID">Image ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteImage(Int32 imageID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteImage(int imageID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteImageRequest(imageID);
             ExecuteAsync(request, success, failure);
@@ -82,7 +82,7 @@ namespace OneCloudNet.Client
         /// <param name="networkID">Network unique ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetNetwork(Int32 networkID, Action<Network> success, Action<OneCloudException> failure)
+        public void GetNetwork(int networkID, Action<Network> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetNetworkRequest(networkID);
             ExecuteAsync(request, success, failure);
@@ -94,7 +94,7 @@ namespace OneCloudNet.Client
         /// <param name="name">Network name.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateNetwork(String name, Action<Network> success, Action<OneCloudException> failure)
+        public void CreateNetwork(string name, Action<Network> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateNetworkRequest(name);
             ExecuteAsync(request, success, failure);
@@ -106,7 +106,7 @@ namespace OneCloudNet.Client
         /// <param name="networkID">Network ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteNetwork(Int32 networkID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteNetwork(int networkID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteNetworkRequest(networkID);
             ExecuteAsync(request, success, failure);
@@ -148,7 +148,7 @@ namespace OneCloudNet.Client
         /// <param name="serverID">Server unique ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetServer(Int32 serverID, Action<Server> success, Action<OneCloudException> failure)
+        public void GetServer(int serverID, Action<Server> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetServerRequest(serverID);
             ExecuteAsync(request, success, failure);
@@ -167,7 +167,7 @@ namespace OneCloudNet.Client
         /// <param name="dcLocation">Data center technical title.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateServer(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation, Action<Server> success, Action<OneCloudException> failure)
+        public void CreateServer(string name, int cpu, int ram, int hdd, string imageID, string hddType, bool isHighPerformance, string dcLocation, Action<Server> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateServerRequest(name, cpu, ram, hdd, imageID, hddType, isHighPerformance, dcLocation);
             ExecuteAsync(request, success, failure);
@@ -184,7 +184,7 @@ namespace OneCloudNet.Client
         /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void ChangeServer(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance, Action<Action> success, Action<OneCloudException> failure)
+        public void ChangeServer(int serverID, int cpu, int ram, int hdd, string hddType, bool isHighPerformance, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateChangeServerRequest(serverID, cpu, ram, hdd, hddType, isHighPerformance);
             ExecuteAsync(request, success, failure);
@@ -196,7 +196,7 @@ namespace OneCloudNet.Client
         /// <param name="serverID">Server ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteServer(Int32 serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteServer(int serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteServerRequest(serverID);
             ExecuteAsync(request, success, failure);
@@ -209,7 +209,7 @@ namespace OneCloudNet.Client
         /// <param name="type">Type of action.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void PowerServer(Int32 serverID, Power type, Action<Action> success, Action<OneCloudException> failure)
+        public void PowerServer(int serverID, Power type, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreatePowerServerRequest(serverID, type.ToString());
             ExecuteAsync(request, success, failure);
@@ -223,7 +223,7 @@ namespace OneCloudNet.Client
         /// <param name="networkID">Private network ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void ServerNetwork(Int32 serverID, NetworkAction type, Int32? networkID, Action<Action> success, Action<OneCloudException> failure)
+        public void ServerNetwork(int serverID, NetworkAction type, int? networkID, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateServerNetworkRequest(serverID, type.ToString(), networkID);
             ExecuteAsync(request, success, failure);
@@ -235,7 +235,7 @@ namespace OneCloudNet.Client
         /// <param name="serverID">Server ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetActions(Int32 serverID, Action<List<Action>> success, Action<OneCloudException> failure)
+        public void GetActions(int serverID, Action<List<Action>> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetActionsRequest(serverID);
             ExecuteAsync(request, success, failure);
@@ -248,7 +248,7 @@ namespace OneCloudNet.Client
         /// <param name="actionID">Action ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetAction(Int32 serverID, Int32 actionID, Action<Action> success, Action<OneCloudException> failure)
+        public void GetAction(int serverID, int actionID, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetActionRequest(serverID, actionID);
             ExecuteAsync(request, success, failure);
@@ -274,7 +274,7 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain unique ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetDomain(Int32 domainID, Action<Domain> success, Action<OneCloudException> failure)
+        public void GetDomain(int domainID, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetDomainRequest(domainID);
             ExecuteAsync(request, success, failure);
@@ -286,7 +286,7 @@ namespace OneCloudNet.Client
         /// <param name="name">Domain name.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateDomain(String name, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateDomain(string name, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateDomainRequest(name);
             ExecuteAsync(request, success, failure);
@@ -298,7 +298,7 @@ namespace OneCloudNet.Client
         /// <param name="domainID">Domain ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteDomain(Int32 domainID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteDomain(int domainID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteDomainRequest(domainID);
             ExecuteAsync(request, success, failure);
@@ -313,9 +313,9 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateARecord(Int32 domainID, String ip, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateARecord(int domainID, string ip, string name, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
-            var request = _requestHelper.CreateCreateARecordRequest(domainID, ip, name,ttl);
+            var request = _requestHelper.CreateCreateARecordRequest(domainID, ip, name, ttl);
             ExecuteAsync(request, success, failure);
         }
 
@@ -328,7 +328,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateAAAARecord(Int32 domainID, String ip, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateAAAARecord(int domainID, string ip, string name, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateAAAARecordRequest(domainID, ip, name, ttl);
             ExecuteAsync(request, success, failure);
@@ -343,7 +343,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateCNAMERecord(Int32 domainID, String name, String mnemonicName, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateCNAMERecord(int domainID, string name, string mnemonicName, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateCNAMERecordRequest(domainID, name, mnemonicName, ttl);
             ExecuteAsync(request, success, failure);
@@ -358,7 +358,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateMXRecord(Int32 domainID, String hostname, String priority, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateMXRecord(int domainID, string hostname, string priority, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateMXRecordRequest(domainID, hostname, priority, ttl);
             ExecuteAsync(request, success, failure);
@@ -373,7 +373,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateNSRecord(Int32 domainID, String hostname, String name, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateNSRecord(int domainID, string hostname, string name, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateNSRecordRequest(domainID, hostname, name, ttl);
             ExecuteAsync(request, success, failure);
@@ -388,7 +388,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateTXTRecord(Int32 domainID, String name, String text, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateTXTRecord(int domainID, string name, string text, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateTXTRecordRequest(domainID, name, text, ttl);
             ExecuteAsync(request, success, failure);
@@ -401,7 +401,7 @@ namespace OneCloudNet.Client
         /// <param name="recordID">Record ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteRecord(Int32 domainID, Int32 recordID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteRecord(int domainID, int recordID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteRecordRequest(domainID, recordID);
             ExecuteAsync(request, success, failure);
@@ -421,7 +421,7 @@ namespace OneCloudNet.Client
         /// <param name="ttl">Time to live (in seconds).</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void CreateSRVRecord(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl, Action<Domain> success, Action<OneCloudException> failure)
+        public void CreateSRVRecord(int domainID, string service, string proto, string name, string priority, string weight, string port, string target, string ttl, Action<Domain> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCreateSRVRecordRequest(domainID, service, proto, name, priority, weight, port, target, ttl);
             ExecuteAsync(request, success, failure);

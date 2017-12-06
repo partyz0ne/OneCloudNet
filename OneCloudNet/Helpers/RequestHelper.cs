@@ -1,8 +1,8 @@
-﻿using System;
-using RestSharp;
-
-namespace OneCloudNet.Helpers
+﻿namespace OneCloudNet.Helpers
 {
+    using System;
+    using RestSharp;
+
     /// <summary>
     /// Helper class for creating OneCloudNet RestSharp Requests
     /// </summary>
@@ -10,13 +10,13 @@ namespace OneCloudNet.Helpers
     {
         #region Fields
 
-        private readonly String _token;
+        private readonly string _token;
 
         #endregion
 
         #region .ctor
 
-        public RequestHelper(String token)
+        public RequestHelper(string token)
         {
             _token = token;
         }
@@ -34,7 +34,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public RestRequest CreateCreateImageRequest(String name, String techName, Int32 serverID)
+        public RestRequest CreateCreateImageRequest(string name, string techName, int serverID)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/image";
@@ -46,7 +46,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public RestRequest CreateDeleteImageRequest(Int32 imageID)
+        public RestRequest CreateDeleteImageRequest(int imageID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/image/{id}";
@@ -68,7 +68,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateGetNetworkRequest(Int32 networkID)
+        public IRestRequest CreateGetNetworkRequest(int networkID)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = "/network/{id}";
@@ -77,7 +77,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateNetworkRequest(String name)
+        public IRestRequest CreateCreateNetworkRequest(string name)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/network";
@@ -86,134 +86,13 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateDeleteNetworkRequest(Int32 networkID)
+        public IRestRequest CreateDeleteNetworkRequest(int networkID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/network/{id}";
             request.AddHeader("Authorization", "Bearer " + _token);
             request.AddParameter("id", networkID, ParameterType.UrlSegment);
             return request;
-        }
-
-        #endregion
-
-        #region Servers
-
-        public RestRequest CreateGetServersRequest()
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = "/server";
-            request.AddHeader("Authorization", "Bearer " + _token);
-
-            return request;
-        }
-
-        public IRestRequest CreateGetServerRequest(Int32 serverID)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = "/server/{id}";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            return request;
-        }
-
-        public IRestRequest CreateCreateServerRequest(String name, Int32 cpu, Int32 ram, Int32 hdd, String imageID, String hddType, Boolean isHighPerformance, String dcLocation)
-        {
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/server";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("Name", name);
-            CheckServerParams(ref cpu, ref ram, ref hdd);
-            request.AddParameter("CPU", cpu);
-            request.AddParameter("RAM", ram);
-            request.AddParameter("HDD", hdd);
-            request.AddParameter("ImageID", imageID);
-            request.AddParameter("HDDType", hddType);
-            request.AddParameter("isHighPerformance", isHighPerformance);
-            request.AddParameter("DCLocation", dcLocation);
-            return request;
-        }
-
-        public IRestRequest CreateChangeServerRequest(Int32 serverID, Int32 cpu, Int32 ram, Int32 hdd, String hddType, Boolean isHighPerformance)
-        {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = "/server/{id}";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            CheckServerParams(ref cpu, ref ram, ref hdd);
-            request.AddParameter("CPU", cpu);
-            request.AddParameter("RAM", ram);
-            request.AddParameter("HDD", hdd);
-            request.AddParameter("HDDType", hddType);
-            request.AddParameter("isHighPerformance", isHighPerformance);
-            return request;
-        }
-
-        public IRestRequest CreateDeleteServerRequest(Int32 serverID)
-        {
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = "/server/{id}";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            return request;
-        }
-
-        public IRestRequest CreatePowerServerRequest(Int32 serverID, String type)
-        {
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/server/{id}/action";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            request.AddParameter("Type", type);
-            return request;
-        }
-
-        public IRestRequest CreateServerNetworkRequest(Int32 serverID, String type, Int32? networkID)
-        {
-            var request = new RestRequest(Method.POST);
-            request.Resource = "/server/{id}/action";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            request.AddParameter("Type", type);
-            request.AddParameter("NetworkID", networkID);
-            return request;
-        }
-
-        public IRestRequest CreateGetActionsRequest(Int32 serverID)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = "/server/{id}/action";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            return request;
-        }
-
-        public IRestRequest CreateGetActionRequest(Int32 serverID, Int32 actionID)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = "/server/{id}/action/{actionID}";
-            request.AddHeader("Authorization", "Bearer " + _token);
-            request.AddParameter("id", serverID, ParameterType.UrlSegment);
-            request.AddParameter("actionID", actionID, ParameterType.UrlSegment);
-            return request;
-        }
-
-        private static void CheckServerParams(ref Int32 cpu, ref Int32 ram, ref Int32 hdd)
-        {
-            if (cpu < 1)
-                cpu = 1;
-            else if (cpu > 8)
-                cpu = 8;
-
-            if (ram < 512)
-                ram = 512;
-            else if (ram > 16384)
-                ram = 16384;
-
-            if (hdd < 10)
-                hdd = 10;
-            else if (hdd > 250)
-                hdd = 250;
         }
 
         #endregion
@@ -240,6 +119,139 @@ namespace OneCloudNet.Helpers
             request.AddHeader("Authorization", "Bearer " + _token);
 
             return request;
+        }
+
+        #endregion
+
+        #region Servers
+
+        public RestRequest CreateGetServersRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/server";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        public IRestRequest CreateGetServerRequest(int serverID)
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/server/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        public IRestRequest CreateCreateServerRequest(string name, int cpu, int ram, int hdd, string imageID, string hddType, bool isHighPerformance, string dcLocation)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/server";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("Name", name);
+            CheckServerParams(ref cpu, ref ram, ref hdd);
+            request.AddParameter("CPU", cpu);
+            request.AddParameter("RAM", ram);
+            request.AddParameter("HDD", hdd);
+            request.AddParameter("ImageID", imageID);
+            request.AddParameter("HDDType", hddType);
+            request.AddParameter("isHighPerformance", isHighPerformance);
+            request.AddParameter("DCLocation", dcLocation);
+            return request;
+        }
+
+        public IRestRequest CreateChangeServerRequest(int serverID, int cpu, int ram, int hdd, string hddType, bool isHighPerformance)
+        {
+            var request = new RestRequest(Method.PUT);
+            request.Resource = "/server/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            CheckServerParams(ref cpu, ref ram, ref hdd);
+            request.AddParameter("CPU", cpu);
+            request.AddParameter("RAM", ram);
+            request.AddParameter("HDD", hdd);
+            request.AddParameter("HDDType", hddType);
+            request.AddParameter("isHighPerformance", isHighPerformance);
+            return request;
+        }
+
+        public IRestRequest CreateDeleteServerRequest(int serverID)
+        {
+            var request = new RestRequest(Method.DELETE);
+            request.Resource = "/server/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        public IRestRequest CreatePowerServerRequest(int serverID, string type)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/server/{id}/action";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            request.AddParameter("Type", type);
+            return request;
+        }
+
+        public IRestRequest CreateServerNetworkRequest(int serverID, string type, int? networkID)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/server/{id}/action";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            request.AddParameter("Type", type);
+            request.AddParameter("NetworkID", networkID);
+            return request;
+        }
+
+        public IRestRequest CreateGetActionsRequest(int serverID)
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/server/{id}/action";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        public IRestRequest CreateGetActionRequest(int serverID, int actionID)
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/server/{id}/action/{actionID}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", serverID, ParameterType.UrlSegment);
+            request.AddParameter("actionID", actionID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        private static void CheckServerParams(ref int cpu, ref int ram, ref int hdd)
+        {
+            if (cpu < 1)
+            {
+                cpu = 1;
+            }
+            else if (cpu > 8)
+            {
+                cpu = 8;
+            }
+
+            if (ram < 512)
+            {
+                ram = 512;
+            }
+            else if (ram > 16384)
+            {
+                ram = 16384;
+            }
+
+            if (hdd < 10)
+            {
+                hdd = 10;
+            }
+            else if (hdd > 250)
+            {
+                hdd = 250;
+            }
         }
 
         #endregion
