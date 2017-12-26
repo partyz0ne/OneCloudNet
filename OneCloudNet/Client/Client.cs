@@ -1,23 +1,23 @@
-﻿using System;
-using System.Net;
-using OneCloudNet.Exceptions;
-using OneCloudNet.Helpers;
-using RestSharp;
-using RestSharp.Deserializers;
-
-namespace OneCloudNet.Client
+﻿namespace OneCloudNet.Client
 {
+    using System;
+    using System.Net;
+    using OneCloudNet.Exceptions;
+    using OneCloudNet.Helpers;
+    using RestSharp;
+    using RestSharp.Deserializers;
+
     public partial class OneCloudNetClient : IOneCloudNetClient
     {
         /// <summary>
         /// Base URL for API requests.
         /// </summary>
-        private const String ApiBaseUrl = "https://api.1cloud.ru";
+        private const string ApiBaseUrl = "https://api.1cloud.ru";
 
         /// <summary>
         /// Unique private API token for authorization.
         /// </summary>
-        private readonly String _token;
+        private readonly string _token;
 
         /// <summary>
         /// Client for REST-communications.
@@ -30,21 +30,21 @@ namespace OneCloudNet.Client
         private RequestHelper _requestHelper;
 
         /// <summary>
-        /// Proxy settings.
-        /// </summary>
-        public IWebProxy Proxy { get; set; }
-
-        /// <summary>
         /// Default Constructor for the OneCloudNetClient
         /// </summary>
         /// <param name="token">The token to use for the 1Cloud Requests</param>
         /// <param name="proxy">The proxy to use for web requests</param>
-        public OneCloudNetClient(String token, IWebProxy proxy = null)
+        public OneCloudNetClient(string token, IWebProxy proxy = null)
         {
             Proxy = proxy;
             _token = token;
             LoadClient();
         }
+
+        /// <summary>
+        /// Proxy settings.
+        /// </summary>
+        public IWebProxy Proxy { get; set; }
 
         private void LoadClient()
         {
@@ -62,7 +62,9 @@ namespace OneCloudNet.Client
 
             if (response.StatusCode != HttpStatusCode.OK ||
                 response.StatusCode != HttpStatusCode.Created)
+            {
                 throw new OneCloudRestException(response, HttpStatusCode.OK);
+            }
 
             return response.Data;
         }
@@ -73,7 +75,9 @@ namespace OneCloudNet.Client
 
             if (response.StatusCode != HttpStatusCode.OK ||
                 response.StatusCode != HttpStatusCode.Created)
+            {
                 throw new OneCloudRestException(response, HttpStatusCode.OK);
+            }
 
             return response;
         }
@@ -88,14 +92,13 @@ namespace OneCloudNet.Client
                     failure(new OneCloudRestException(response, HttpStatusCode.OK));
                 }
                 else
-                {
-                    success(response);
-                }
+                    {
+                        success(response);
+                    }
             });
         }
 
         private void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<OneCloudException> failure)
-            //where T : new()
         {
             _restClient.ExecuteAsync<T>(request, (response, asynchandle) =>
             {

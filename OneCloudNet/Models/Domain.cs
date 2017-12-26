@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Domain
     {
         /// <summary>
         /// Unique ID.
         /// </summary>
-        public Int32 ID { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// Name of domain.
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Technical name of domain.
         /// </summary>
-        public String TechName { get; set; }
+        public string TechName { get; set; }
 
         /// <summary>
         /// Curretn state.
         /// </summary>
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// Creation date of domain.
@@ -41,81 +41,81 @@ namespace OneCloudNet.Models
         /// <summary>
         /// Unique ID.
         /// </summary>
-        public Int32 ID { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// Record type:
         ///  A, AAAA, MX, CNAME, TXT, NS.
         /// </summary>
-        public String TypeRecord { get; set; }
+        public string TypeRecord { get; set; }
 
         /// <summary>
         /// IP address.
         /// </summary>
-        public String IP { get; set; }
+        public string IP { get; set; }
 
         /// <summary>
         /// Hostname.
         /// "@" - if the record is created for domain, or subdomain name if the record is created for it.
         /// </summary>
-        public String HostName { get; set; }
+        public string HostName { get; set; }
 
         /// <summary>
         /// Record priority (acceptable only for MX-records).
         /// </summary>
-        public String Priority { get; set; }
+        public string Priority { get; set; }
 
         /// <summary>
         /// Record text (acceptable only for MX-records).
         /// </summary>
-        public String Text { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
         /// Mnemonic name (acceptable only for CNAME-records).
         /// </summary>
-        public String MnemonicName { get; set; }
+        public string MnemonicName { get; set; }
 
         /// <summary>
         /// Name of external host name (acceptable only for MX- or NS-records).
         /// </summary>
-        public String ExtHostName { get; set; }
+        public string ExtHostName { get; set; }
 
         /// <summary>
         /// Weight of records with equal priority (for SRV-records).
         /// </summary>
-        public String Weight { get; set; }
+        public string Weight { get; set; }
 
         /// <summary>
         /// Port of workign service (for SRV-records).
         /// </summary>
-        public String Port { get; set; }
+        public string Port { get; set; }
 
         /// <summary>
         /// Canonical computer name of service (for SRV-records).
         /// </summary>
-        public String Target { get; set; }
+        public string Target { get; set; }
 
         /// <summary>
         /// Transport service protocol (for SRV-records).
         /// </summary>
-        public String Proto { get; set; }
+        public string Proto { get; set; }
 
         /// <summary>
         /// Service name (for SRV-records).
         /// </summary>
-        public String Service { get; set; }
+        public string Service { get; set; }
 
         /// <summary>
         /// Time to live (in seconds).
         /// </summary>
-        public String TTL { get; set; }
+        public string TTL { get; set; }
 
         /// <summary>
         /// Current record state.
         ///  New - for creating;
         ///  Active - for active.
         /// </summary>
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// Creation date of record.

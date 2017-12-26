@@ -1,37 +1,37 @@
-﻿using System;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+
     public class DC
     {
         /// <summary>
         /// Unique identifier.
         /// </summary>
-        public Int32 ID { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// Technical name.
         /// </summary>
-        public String TechTitle { get; set; }
+        public string TechTitle { get; set; }
 
         /// <summary>
         /// Name.
         /// </summary>
-        public String Title { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// Short name.
         /// </summary>
-        public String ShortTitle { get; set; }
+        public string ShortTitle { get; set; }
 
         /// <summary>
         /// Is base type device available.
         /// </summary>
-        public Boolean IsEnableLowPool { get; set; }
+        public bool IsEnableLowPool { get; set; }
 
         /// <summary>
         /// Is high power device available.
         /// </summary>
-        public Boolean IsEnableHighPool { get; set; }
+        public bool IsEnableHighPool { get; set; }
     }
 }

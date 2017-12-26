@@ -1,44 +1,28 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using RestSharp;
-
-namespace OneCloudNet.Exceptions
+﻿namespace OneCloudNet.Exceptions
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using RestSharp;
+
     public class OneCloudException : Exception
     {
         public OneCloudException()
         {
-            
         }
 
-        public OneCloudException(String message) : base(message)
+        public OneCloudException(string message) : base(message)
         {
         }
     }
 
     public class OneCloudRestException : OneCloudException
     {
-        /// <summary>
-        /// Returned status code from the request
-        /// </summary>
-        public HttpStatusCode StatusCode { get; set; }
-		
-        /// <summary>
-        /// Expected status codes to have seen instead of the one recieved. 
-        /// </summary>
-        public HttpStatusCode[] ExpectedCodes { get; private set; }
-		
-        /// <summary>
-        /// The response of the error call (for Debugging use)
-        /// </summary>
-        public IRestResponse Response { get; private set; }
-
         public OneCloudRestException()
         {
         }
 
-        public OneCloudRestException(String message)
+        public OneCloudRestException(string message)
             : base(message)
         {
         }
@@ -48,12 +32,27 @@ namespace OneCloudNet.Exceptions
         /// </summary>
         /// <param name="r">Rest Response which was not expected.</param>
         /// <param name="expectedCodes">The expected status codes which were not found.</param>
-        public OneCloudRestException(IRestResponse r, params HttpStatusCode[] expectedCodes)  
+        public OneCloudRestException(IRestResponse r, params HttpStatusCode[] expectedCodes)
         {
             Response = r;
-			StatusCode = r.StatusCode;
+            StatusCode = r.StatusCode;
             ExpectedCodes = expectedCodes;
         }
+
+        /// <summary>
+        /// Returned status code from the request
+        /// </summary>
+        public HttpStatusCode StatusCode { get; set; }
+
+        /// <summary>
+        /// Expected status codes to have seen instead of the one recieved. 
+        /// </summary>
+        public HttpStatusCode[] ExpectedCodes { get; private set; }
+
+        /// <summary>
+        /// The response of the error call (for Debugging use)
+        /// </summary>
+        public IRestResponse Response { get; private set; }
 
         /// <summary>
         /// Overridden message for 1Cloud Exception. 

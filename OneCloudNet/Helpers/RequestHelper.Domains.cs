@@ -1,9 +1,9 @@
-﻿using System;
-using RestSharp;
-
-namespace OneCloudNet.Helpers
+﻿namespace OneCloudNet.Helpers
 {
-    partial class RequestHelper
+    using System;
+    using RestSharp;
+
+    public partial class RequestHelper
     {
         #region Servers
 
@@ -16,7 +16,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateGetDomainRequest(Int32 domainID)
+        public IRestRequest CreateGetDomainRequest(int domainID)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = "/dns/{id}";
@@ -25,7 +25,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateDomainRequest(String name)
+        public IRestRequest CreateCreateDomainRequest(string name)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns";
@@ -34,7 +34,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateDeleteDomainRequest(Int32 domainID)
+        public IRestRequest CreateDeleteDomainRequest(int domainID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/dns/{id}";
@@ -43,7 +43,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateARecordRequest(Int32 domainID, String ip, String name, String ttl)
+        public IRestRequest CreateCreateARecordRequest(int domainID, string ip, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recorda";
@@ -55,7 +55,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateAAAARecordRequest(Int32 domainID, String ip, String name, String ttl)
+        public IRestRequest CreateCreateAAAARecordRequest(int domainID, string ip, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordaaaa";
@@ -67,7 +67,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateCNAMERecordRequest(Int32 domainID, String name, String mnemonicName, String ttl)
+        public IRestRequest CreateCreateCNAMERecordRequest(int domainID, string name, string mnemonicName, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordcname";
@@ -79,7 +79,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateMXRecordRequest(Int32 domainID, String hostname, String priority, String ttl)
+        public IRestRequest CreateCreateMXRecordRequest(int domainID, string hostname, string priority, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordmx";
@@ -91,7 +91,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateNSRecordRequest(Int32 domainID, String hostname, String name, String ttl)
+        public IRestRequest CreateCreateNSRecordRequest(int domainID, string hostname, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordns";
@@ -103,7 +103,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateTXTRecordRequest(Int32 domainID, String hostName, String text, String ttl)
+        public IRestRequest CreateCreateTXTRecordRequest(int domainID, string hostName, string text, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordtxt";
@@ -115,7 +115,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateDeleteRecordRequest(Int32 domainID, Int32 recordID)
+        public IRestRequest CreateDeleteRecordRequest(int domainID, int recordID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/dns/{domainid}/{recordId}";
@@ -125,7 +125,7 @@ namespace OneCloudNet.Helpers
             return request;
         }
 
-        public IRestRequest CreateCreateSRVRecordRequest(Int32 domainID, String service, String proto, String name, String priority, String weight, String port, String target, String ttl)
+        public IRestRequest CreateCreateSRVRecordRequest(int domainID, string service, string proto, string name, string priority, string weight, string port, string target, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordtxt";

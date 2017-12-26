@@ -1,43 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public class Network
     {
-        /// <summary>
-        /// Private network unique ID.
-        /// </summary>
-        public Int32 ID { get; set; }
-
-        /// <summary>
-        /// Network name.
-        /// </summary>
-        public String Name { get; set; }
-
-        /// <summary>
-        /// Network state. Can contain such values as:
-        ///  "New" - network is being created;
-        ///  "Active" - network is created;
-        ///  "NeedMoney" - not enough money for creating.
-        /// </summary>
-        public String State { get; set; }
-
-        /// <summary>
-        /// Network mask.
-        /// </summary>
-        public String Mask { get; set; }
-
-        /// <summary>
-        /// Network gateway.
-        /// </summary>
-        public String Gateway { get; set; }
-
-        /// <summary>
-        /// List of connected servers.
-        /// </summary>
-        public List<LinkedServer> LinkedServers { get; set; }
-
         /// <summary>
         /// Private network constructor.
         /// </summary>
@@ -45,6 +12,39 @@ namespace OneCloudNet.Models
         {
             LinkedServers = new List<LinkedServer>();
         }
+        
+        /// <summary>
+        /// Private network unique ID.
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
+        /// Network name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Network state. Can contain such values as:
+        ///  "New" - network is being created;
+        ///  "Active" - network is created;
+        ///  "NeedMoney" - not enough money for creating.
+        /// </summary>
+        public string State { get; set; }
+
+        /// <summary>
+        /// Network mask.
+        /// </summary>
+        public string Mask { get; set; }
+
+        /// <summary>
+        /// Network gateway.
+        /// </summary>
+        public string Gateway { get; set; }
+
+        /// <summary>
+        /// List of connected servers.
+        /// </summary>
+        public List<LinkedServer> LinkedServers { get; set; }
     }
 
     public class LinkedServer
@@ -52,16 +52,16 @@ namespace OneCloudNet.Models
         /// <summary>
         /// IP-address of server.
         /// </summary>
-        public String IP { get; set; }
+        public string IP { get; set; }
 
         /// <summary>
         /// MAC-address of server.
         /// </summary>
-        public String MAC { get; set; }
+        public string MAC { get; set; }
 
         /// <summary>
         /// Server unique ID.
         /// </summary>
-        public Int32 ServerID { get; set; }
+        public int ServerID { get; set; }
     }
 }

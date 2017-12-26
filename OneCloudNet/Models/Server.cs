@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public class Server
     {
+        public Server()
+        {
+            LinkedNetworks = new List<LinkedNetwork>();
+        }
+
         /// <summary>
         /// Unique server ID.
         /// </summary>
-        public Int32 ID { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// User's server name, entered at creation.
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Server state at the moment of request handling. Can be one of these values:
@@ -22,59 +27,59 @@ namespace OneCloudNet.Models
         /// Blocked: server is blocked as negative account bill
         /// NeedMoney: server is not created as not enough money
         /// </summary>
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// Server power state at the moment of request handling. Can be one of these values:
         /// true: server power is on
         /// false: server power is off
         /// </summary>
-        public Boolean IsPowerOn { get; set; }
+        public bool IsPowerOn { get; set; }
 
         /// <summary>
         /// Number of processor cores
         /// </summary>
-        public Int32 CPU { get; set; }
+        public int CPU { get; set; }
 
         /// <summary>
         /// RAM volume (Mb).
         /// </summary>
-        public Int32 RAM { get; set; }
+        public int RAM { get; set; }
 
         /// <summary>
         /// Hard disk space (Gb).
         /// </summary>
-        public Int32 HDD { get; set; }
+        public int HDD { get; set; }
 
         /// <summary>
         /// External IPv4 address.
         /// </summary>
-        public String IP { get; set; }
+        public string IP { get; set; }
 
         /// <summary>
         /// Admin username.
         /// </summary>
-        public String AdminUserName { get; set; }
+        public string AdminUserName { get; set; }
 
         /// <summary>
         /// Admin password.
         /// </summary>
-        public String AdminPassword { get; set; }
+        public string AdminPassword { get; set; }
 
         /// <summary>
         /// Inital server image.
         /// </summary>
-        public String Image { get; set; }
+        public string Image { get; set; }
 
         /// <summary>
         /// True if server is in highperformance pool, false - in basic pool.
         /// </summary>
-        public Boolean IsHighPerformance { get; set; }
+        public bool IsHighPerformance { get; set; }
 
         /// <summary>
         /// Type of server HDD ("SAS", "SSD").
         /// </summary>
-        public String HDDType { get; set; }
+        public string HDDType { get; set; }
 
         /// <summary>
         /// List of connected networks.
@@ -84,17 +89,12 @@ namespace OneCloudNet.Models
         /// <summary>
         /// Name of hosting data center.
         /// </summary>
-        public String DCLocation { get; set; }
+        public string DCLocation { get; set; }
 
         /// <summary>
         /// Type of server OS.
         /// </summary>
-        public String ImageFamily { get; set; }
-
-        public Server()
-        {
-            LinkedNetworks = new List<LinkedNetwork>();
-        }
+        public string ImageFamily { get; set; }
     }
 
     public class LinkedNetwork
@@ -102,16 +102,16 @@ namespace OneCloudNet.Models
         /// <summary>
         /// Network ID.
         /// </summary>
-        public Int32 NetworkID { get; set; }
+        public int NetworkID { get; set; }
 
         /// <summary>
         /// Server IP-address.
         /// </summary>
-        public String IP { get; set; }
+        public string IP { get; set; }
 
         /// <summary>
         /// Server MAC-address.
         /// </summary>
-        public String MAC { get; set; }
+        public string MAC { get; set; }
     }
 }
