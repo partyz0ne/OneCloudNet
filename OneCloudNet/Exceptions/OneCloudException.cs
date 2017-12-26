@@ -65,8 +65,10 @@ namespace OneCloudNet.Exceptions
 	    {
 		    get
 		    {
-			    return
-			        $"Received Response [{Response.StatusCode}] : Expected to see [{String.Join(", ", ExpectedCodes.Select(code => Enum.GetName(typeof(HttpStatusCode), code)))}]. The HTTP response was [{Response.Content}].";
+			    return string.Format("Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].", 
+                    Response.StatusCode,
+                    String.Join(", ", ExpectedCodes.Select(code => Enum.GetName(typeof(HttpStatusCode), code))),
+                    Response.Content);
 		    }
 	    }        
     }

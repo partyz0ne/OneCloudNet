@@ -60,7 +60,8 @@ namespace OneCloudNet.Client
         {
             var response = _restClient.Execute<T>(request);
 
-            if (response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK ||
+                response.StatusCode != HttpStatusCode.Created)
                 throw new OneCloudRestException(response, HttpStatusCode.OK);
 
             return response.Data;
@@ -70,7 +71,8 @@ namespace OneCloudNet.Client
         {
             var response = _restClient.Execute(request);
 
-            if (response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK ||
+                response.StatusCode != HttpStatusCode.Created)
                 throw new OneCloudRestException(response, HttpStatusCode.OK);
 
             return response;
@@ -80,7 +82,8 @@ namespace OneCloudNet.Client
         {
             _restClient.ExecuteAsync(request, (response, asynchandle) =>
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.OK ||
+                    response.StatusCode != HttpStatusCode.Created)
                 {
                     failure(new OneCloudRestException(response, HttpStatusCode.OK));
                 }
@@ -96,7 +99,8 @@ namespace OneCloudNet.Client
         {
             _restClient.ExecuteAsync<T>(request, (response, asynchandle) =>
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.OK ||
+                    response.StatusCode != HttpStatusCode.Created)
                 {
                     failure(new OneCloudRestException(response, HttpStatusCode.OK));
                 }

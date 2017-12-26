@@ -231,6 +231,50 @@ namespace OneCloudNet.Helpers
 
         #endregion
 
+        #region Account
+
+        public IRestRequest CreateGetAccountRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/account";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        #endregion
+
+        #region Storages
+
+        public IRestRequest CreateGetStorageRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/storage";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        public IRestRequest CreateActivateStorageRequest()
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/storage";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        public IRestRequest CreateDeactivateStorageRequest()
+        {
+            var request = new RestRequest(Method.DELETE);
+            request.Resource = "/storage";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        #endregion
+
         #region DC
 
         public IRestRequest CreateGetDCsRequest()

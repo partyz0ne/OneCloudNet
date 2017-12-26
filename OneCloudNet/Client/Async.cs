@@ -13,12 +13,29 @@ namespace OneCloudNet.Client
         #region Customer
 
         /// <summary>
-        /// Get account balance.
+        /// 
         /// </summary>
-        /// <returns>Current balance.</returns>
+        /// <param name="success"></param>
+        /// <param name="failure"></param>
         public void Balance(Action<String> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateBalanceRequest();
+            ExecuteAsync(request, success, failure);
+        }
+
+        #endregion
+
+        #region Account
+
+        /// <summary>
+        /// Get account info.
+        /// </summary>
+        /// <param name="success"></param>
+        /// <param name="failure"></param>
+        public void GetAccount(Action<Account> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetAccountRequest();
+
             ExecuteAsync(request, success, failure);
         }
 

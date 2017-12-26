@@ -23,6 +23,46 @@ namespace OneCloudNet.Client
 
         #endregion
 
+        #region Account
+
+        /// <summary>
+        /// Get account info.
+        /// </summary>
+        /// <returns></returns>
+        public Account GetAccount()
+        {
+            var request = _requestHelper.CreateGetAccountRequest();
+
+            return Execute<Account>(request);
+        }
+
+        #endregion
+
+        #region Storages
+
+        public Storage GetStorage()
+        {
+            var request = _requestHelper.CreateGetStorageRequest();
+
+            return Execute<Storage>(request);
+        }
+
+        public Storage ActivateStorage()
+        {
+            var request = _requestHelper.CreateActivateStorageRequest();
+
+            return Execute<Storage>(request);
+        }
+
+        public Storage DeactivateStorage()
+        {
+            var request = _requestHelper.CreateDeactivateStorageRequest();
+
+            return Execute<Storage>(request);
+        }
+
+        #endregion
+
         #region Images
 
         public IEnumerable<Image> GetImages()
