@@ -126,6 +126,38 @@
 
         #endregion
 
+        #region SSHKey
+
+        public IEnumerable<SSHKey> GetSSHKeys()
+        {
+            var request = _requestHelper.CreateGetSSHKeysRequest();
+
+            return Execute<List<SSHKey>>(request);
+        }
+
+        public SSHKey GetSSHKey(int keyID)
+        {
+            var request = _requestHelper.CreateGetSSHKeyRequest(keyID);
+
+            return Execute<SSHKey>(request);
+        }
+
+        public SSHKey CreateSSHKey(string title, string publicKey)
+        {
+            var request = _requestHelper.CreateCreateSSHKeyRequest(title, publicKey);
+
+            return Execute<SSHKey>(request);
+        }
+
+        public bool DeleteSSHKey(int keyID)
+        {
+            var request = _requestHelper.CreateDeleteSSHKeyRequest(keyID);
+            var response = Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        #endregion
+
         #region Servers
 
         public IEnumerable<Server> GetServers()

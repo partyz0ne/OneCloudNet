@@ -67,11 +67,13 @@
     <Compile Include="Helpers\RequestHelper.Domains.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DC.cs" />
     <Compile Include="Models\Domain.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Network.cs" />
     <Compile Include="Models\Server.cs" />
+    <Compile Include="Models\SSHKey.cs" />
     <Compile Include="Models\Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -146,6 +146,64 @@
 
         #endregion
 
+        #region SSHKey
+
+        /// <summary>
+        /// Get list of servers.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        public void GetSSHKeys(Action<List<SSHKey>> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetSSHKeysRequest();
+            ExecuteAsync(request, success, failure);
+        }
+
+        /// <summary>
+        /// Get server info by ID.
+        /// </summary>
+        /// <param name="serverID">SSHKey unique ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        public void GetSSHKey(int serverID, Action<SSHKey> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateGetSSHKeyRequest(serverID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        /// <summary>
+        /// Create new server.
+        /// </summary>
+        /// <param name="name">SSHKey name.</param>
+        /// <param name="cpu">Number of CPU.</param>
+        /// <param name="ram">Volume of RAM (Mb).</param>
+        /// <param name="hdd">Hard disk space (Gb).</param>
+        /// <param name="imageID">Initial image ID.</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
+        /// <param name="dcLocation">Data center technical title.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        public void CreateSSHKey(string title, string publicKey, Action<SSHKey> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateCreateSSHKeyRequest(title, publicKey);
+            ExecuteAsync(request, success, failure);
+        }
+
+        /// <summary>
+        /// Delete server.
+        /// </summary>
+        /// <param name="serverID">SSHKey ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        public void DeleteSSHKey(int serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        {
+            var request = _requestHelper.CreateDeleteSSHKeyRequest(serverID);
+            ExecuteAsync(request, success, failure);
+        }
+
+        #endregion
+
         #region Servers
 
         /// <summary>
