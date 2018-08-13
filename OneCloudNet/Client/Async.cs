@@ -162,12 +162,12 @@
         /// <summary>
         /// Get server info by ID.
         /// </summary>
-        /// <param name="serverID">SSHKey unique ID.</param>
+        /// <param name="keyID">SSHKey unique ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void GetSSHKey(int serverID, Action<SSHKey> success, Action<OneCloudException> failure)
+        public void GetSSHKey(int keyID, Action<SSHKey> success, Action<OneCloudException> failure)
         {
-            var request = _requestHelper.CreateGetSSHKeyRequest(serverID);
+            var request = _requestHelper.CreateGetSSHKeyRequest(keyID);
             ExecuteAsync(request, success, failure);
         }
 
@@ -193,12 +193,12 @@
         /// <summary>
         /// Delete server.
         /// </summary>
-        /// <param name="serverID">SSHKey ID.</param>
+        /// <param name="keyID">SSHKey ID.</param>
         /// <param name="success">Callback for successfull result.</param>
         /// <param name="failure">Callback for failure.</param>
-        public void DeleteSSHKey(int serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
+        public void DeleteSSHKey(int keyID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
-            var request = _requestHelper.CreateDeleteSSHKeyRequest(serverID);
+            var request = _requestHelper.CreateDeleteSSHKeyRequest(keyID);
             ExecuteAsync(request, success, failure);
         }
 
