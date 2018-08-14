@@ -110,6 +110,47 @@
 
         #endregion
 
+        #region SSHKey
+
+        public RestRequest CreateGetSSHKeysRequest()
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/sshkey";
+            request.AddHeader("Authorization", "Bearer " + _token);
+
+            return request;
+        }
+
+        public IRestRequest CreateGetSSHKeyRequest(int keyID)
+        {
+            var request = new RestRequest(Method.GET);
+            request.Resource = "/sshkey/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", keyID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        public IRestRequest CreateCreateSSHKeyRequest(string title, string publicKey)
+        {
+            var request = new RestRequest(Method.POST);
+            request.Resource = "/server";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("Title", title);
+            request.AddParameter("PublicKey", publicKey);
+            return request;
+        }
+
+        public IRestRequest CreateDeleteSSHKeyRequest(int keyID)
+        {
+            var request = new RestRequest(Method.DELETE);
+            request.Resource = "/server/{id}";
+            request.AddHeader("Authorization", "Bearer " + _token);
+            request.AddParameter("id", keyID, ParameterType.UrlSegment);
+            return request;
+        }
+
+        #endregion
+
         #region Servers
 
         public RestRequest CreateGetServersRequest()

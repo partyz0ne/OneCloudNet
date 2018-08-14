@@ -104,6 +104,40 @@
         void GetDCs(Action<List<DC>> success, Action<OneCloudException> failure);
 
         #endregion
+		
+		#region SSHKeys
+
+        /// <summary>
+        /// Get list of SSHKeys.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void GetSSHKeys(Action<List<SSHKey>> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Get SSHKey info by ID.
+        /// </summary>
+        /// <param name="keyID">SSHKey unique ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void GetSSHKey(int keyID, Action<SSHKey> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Create new SSHKey.
+        /// </summary>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void CreateSSHKey(string title, string publicKey, Action<SSHKey> success, Action<OneCloudException> failure);
+
+        /// <summary>
+        /// Delete SSHKey.
+        /// </summary>
+        /// <param name="keyID">SSHKey ID.</param>
+        /// <param name="success">Callback for successfull result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        void DeleteSSHKey(int keyID, Action<IRestResponse> success, Action<OneCloudException> failure);
+
+        #endregion
 
         #region Servers
 
@@ -399,6 +433,36 @@
         /// </summary>
         /// <returns>List of DCs.</returns>
         IEnumerable<DC> GetDCs();
+
+        #endregion
+
+        #region SSHKeys
+
+        /// <summary>
+        /// Get list of keys.
+        /// </summary>
+        /// <returns>List of keys.</returns>
+        IEnumerable<SSHKey> GetSSHKeys();
+
+        /// <summary>
+        /// Get key info by ID.
+        /// </summary>
+        /// <param name="keyID">SSHKey unique ID.</param>
+        /// <returns>SSHKey information.</returns>
+        SSHKey GetSSHKey(int keyID);
+
+        /// <summary>
+        /// Create new key.
+        /// </summary>
+        /// <returns>Created key information.</returns>
+        SSHKey CreateSSHKey(string title, string publicKey);
+
+        /// <summary>
+        /// Delete key.
+        /// </summary>
+        /// <param name="keyID">SSHKey ID.</param>
+        /// <returns>Result of operation.</returns>
+        bool DeleteSSHKey(int keyID);
 
         #endregion
 
