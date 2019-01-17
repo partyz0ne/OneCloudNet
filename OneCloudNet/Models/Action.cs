@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Contains the main info on Action with server.
+    /// </summary>
     public class Action
     {
         /// <summary>
@@ -26,5 +29,15 @@
         /// Postponed: action postponed
         /// </summary>
         public string State { get; set; }
+
+        /// <summary>
+        /// The start date of an action.
+        /// </summary>
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// The finish date of an action.
+        /// </summary>
+        public DateTime EndDate { get; set; }
     }
 }

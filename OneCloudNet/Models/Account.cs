@@ -1,7 +1,10 @@
-﻿using System;
-
-namespace OneCloudNet.Models
+﻿namespace OneCloudNet.Models
 {
+    using System;
+
+    /// <summary>
+    /// Contains the main info on user's Account.
+    /// </summary>
     public class Account
     {
         /// <summary>

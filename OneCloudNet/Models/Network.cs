@@ -1,18 +1,46 @@
 ﻿namespace OneCloudNet.Models
 {
-    using System;
     using System.Collections.Generic;
-    
-    public class Network
+
+    /// <summary>
+    /// Contains the main info on Public Network.
+    /// </summary>
+    public class PublicNetwork : PrivateNetwork
+    {
+        /// <summary>
+        /// Network address.
+        /// </summary>
+        public string CIDR { get; set; }
+
+        /// <summary>
+        /// External address of network gateway.
+        /// </summary>
+        public string EdgeExternalIp { get; set; }
+
+        /// <summary>
+        /// Firewall properties.
+        /// </summary>
+        public Firewall Firewall { get; set; }
+
+        /// <summary>
+        /// VPN properties.
+        /// </summary>
+        public VPN Vpn { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on Private Network.
+    /// </summary>
+    public class PrivateNetwork : Network
     {
         /// <summary>
         /// Private network constructor.
         /// </summary>
-        public Network()
+        public PrivateNetwork()
         {
             LinkedServers = new List<LinkedServer>();
         }
-        
+
         /// <summary>
         /// Private network unique ID.
         /// </summary>
@@ -32,6 +60,37 @@
         public string State { get; set; }
 
         /// <summary>
+        /// List of connected servers.
+        /// </summary>
+        public List<LinkedServer> LinkedServers { get; set; }
+
+        /// <summary>
+        /// Flag whether the DHCP server exists.
+        /// </summary>
+        public bool IsDHCP { get; set; }
+
+        /// <summary>
+        /// Data center location name.
+        /// </summary>
+        public string DCLocation { get; set; }
+
+        /// <summary>
+        /// Network capacity.
+        /// </summary>
+        public string NetworkCapacity { get; set; }
+
+        /// <summary>
+        /// Network type.
+        /// </summary>
+        public string Type { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on Network.
+    /// </summary>
+    public abstract class Network
+    {
+        /// <summary>
         /// Network mask.
         /// </summary>
         public string Mask { get; set; }
@@ -42,11 +101,14 @@
         public string Gateway { get; set; }
 
         /// <summary>
-        /// List of connected servers.
+        /// Network bandwidth.
         /// </summary>
-        public List<LinkedServer> LinkedServers { get; set; }
+        public int Bandwidth { get; set; }
     }
 
+    /// <summary>
+    /// Contains the main info on network's Linked Server.
+    /// </summary>
     public class LinkedServer
     {
         /// <summary>
@@ -63,5 +125,155 @@
         /// Server unique ID.
         /// </summary>
         public int ServerID { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on network Firewall.
+    /// </summary>
+    public class Firewall
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Firewall" /> class.
+        /// </summary>
+        public Firewall()
+        {
+            Rules = new List<FirewallRule>();
+        }
+
+        /// <summary>
+        /// Flag if the firewall is enabled.
+        /// </summary>
+        public bool Enabled { get; set; }
+
+        /// <summary>
+        /// Default rule action.
+        /// </summary>
+        public string DefaultRuleAction { get; set; }
+
+        /// <summary>
+        /// List of firewall rules.
+        /// </summary>
+        public List<FirewallRule> Rules { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on network Firewall Rule.
+    /// </summary>
+    public class FirewallRule
+    {
+        /// <summary>
+        /// Sequential number of the rule.
+        /// </summary>
+        public int Number { get; set; }
+
+        /// <summary>
+        /// The name of the rule.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Rule action.
+        /// </summary>
+        public string Action { get; set; }
+
+        /// <summary>
+        /// Used protocol (Any, Tcp, Udp, TcpAndUdp, Icmp).
+        /// </summary>
+        public string Protocol { get; set; }
+
+        /// <summary>
+        /// Source IP address.
+        /// </summary>
+        public string Source { get; set; }
+
+        /// <summary>
+        /// Source port.
+        /// </summary>
+        public string SourcePort { get; set; }
+
+        /// <summary>
+        /// Destination IP address.
+        /// </summary>
+        public string Destination { get; set; }
+
+        /// <summary>
+        /// Destination port.
+        /// </summary>
+        public string DestinationPort { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on network VPN.
+    /// </summary>
+    public class VPN
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VPN" /> class.
+        /// </summary>
+        public VPN()
+        {
+            Tunnels = new List<Tunnel>();
+        }
+
+        /// <summary>
+        /// List of VPN tunnels.
+        /// </summary>
+        public List<Tunnel> Tunnels { get; set; }
+    }
+
+    /// <summary>
+    /// Contains the main info on VPN Tunnel.
+    /// </summary>
+    public class Tunnel
+    {
+        /// <summary>
+        /// The unique tunnel ID.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// The state of the tunnel.
+        /// </summary>
+        public string State { get; set; }
+
+        /// <summary>
+        /// The name of the tunnel.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Flag if the tunnel is enabled.
+        /// </summary>
+        public bool Enabled { get; set; }
+
+        /// <summary>
+        /// Tunnel MTU.
+        /// </summary>
+        public int Mtu { get; set; }
+
+        /// <summary>
+        /// Encryption type.
+        /// </summary>
+        public string EncryptionType { get; set; }
+
+        /// <summary>
+        /// Shared key.
+        /// </summary>
+        public string SharedKey { get; set; }
+
+        /// <summary>
+        /// Network behind the remote gateway.
+        /// </summary>
+        public string PeerNetwork { get; set; }
+
+        /// <summary>
+        /// IP address of remote gateway.
+        /// </summary>
+        public string PeerEndpoint { get; set; }
+
+        /// <summary>
+        /// External interface of remote gateway.
+        /// </summary>
+        public string PeerIdentificator { get; set; }
     }
 }

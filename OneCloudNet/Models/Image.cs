@@ -1,7 +1,8 @@
 ﻿namespace OneCloudNet.Models
 {
-    using System;
-    
+    /// <summary>
+    /// Contains the main info on server Image.
+    /// </summary>
     public class Image
     {
         /// <summary>
@@ -28,11 +29,5 @@
         /// OS type family ("Linux", "Windows", "Bsd").
         /// </summary>
         public string Family { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>Undocummented property.</remarks>
-        public bool IsAvailableISP { get; set; }
     }
 }

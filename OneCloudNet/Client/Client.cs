@@ -5,8 +5,11 @@
     using OneCloudNet.Exceptions;
     using OneCloudNet.Helpers;
     using RestSharp;
-    using RestSharp.Deserializers;
+    using RestSharp.Serialization.Json;
 
+    /// <summary>
+    /// The main 1Cloud API client interface.
+    /// </summary>
     public partial class OneCloudNetClient : IOneCloudNetClient
     {
         /// <summary>
@@ -84,34 +87,38 @@
 
         private void ExecuteAsync(IRestRequest request, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
-            _restClient.ExecuteAsync(request, (response, asynchandle) =>
-            {
-                if (response.StatusCode != HttpStatusCode.OK &&
-                    response.StatusCode != HttpStatusCode.Created)
+            _restClient.ExecuteAsync(
+                request,
+                (response, asynchandle) =>
                 {
-                    failure(new OneCloudRestException(response, HttpStatusCode.OK));
-                }
-                else
+                    if (response.StatusCode != HttpStatusCode.OK &&
+                        response.StatusCode != HttpStatusCode.Created)
+                    {
+                        failure(new OneCloudRestException(response, HttpStatusCode.OK));
+                    }
+                    else
                     {
                         success(response);
                     }
-            });
+                });
         }
 
         private void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<OneCloudException> failure)
         {
-            _restClient.ExecuteAsync<T>(request, (response, asynchandle) =>
-            {
-                if (response.StatusCode != HttpStatusCode.OK &&
-                    response.StatusCode != HttpStatusCode.Created)
+            _restClient.ExecuteAsync<T>(
+                request,
+                (response, asynchandle) =>
                 {
-                    failure(new OneCloudRestException(response, HttpStatusCode.OK));
-                }
-                else
-                {
-                    success(response.Data);
-                }
-            });
+                    if (response.StatusCode != HttpStatusCode.OK &&
+                        response.StatusCode != HttpStatusCode.Created)
+                    {
+                        failure(new OneCloudRestException(response, HttpStatusCode.OK));
+                    }
+                    else
+                    {
+                        success(response.Data);
+                    }
+                });
         }
     }
 }

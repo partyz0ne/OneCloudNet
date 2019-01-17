@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Contains the main info on Domain.
+    /// </summary>
     public class Domain
     {
         /// <summary>
@@ -36,6 +39,9 @@
         public List<DomainRecord> LinkedRecords { get; set; } 
     }
 
+    /// <summary>
+    /// Contains the main info on Domain Record.
+    /// </summary>
     public class DomainRecord
     {
         /// <summary>
@@ -101,16 +107,6 @@
         public string Proto { get; set; }
 
         /// <summary>
-        /// Service name (for SRV-records).
-        /// </summary>
-        public string Service { get; set; }
-
-        /// <summary>
-        /// Time to live (in seconds).
-        /// </summary>
-        public string TTL { get; set; }
-
-        /// <summary>
         /// Current record state.
         ///  New - for creating;
         ///  Active - for active.
@@ -118,8 +114,8 @@
         public string State { get; set; }
 
         /// <summary>
-        /// Creation date of record.
+        /// Canonical description of the record.
         /// </summary>
-        public DateTime DateCreate { get; set; }
+        public string CanonicalDescription { get; set; }
     }
 }

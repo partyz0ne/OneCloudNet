@@ -1,5 +1,8 @@
 ﻿namespace OneCloudNet.Enums
 {
+    /// <summary>
+    /// Power related actions for server.
+    /// </summary>
     public enum Power
     {
         /// <summary>
@@ -23,6 +26,9 @@
         PowerReboot = 4,
     }
 
+    /// <summary>
+    /// Network related actions for server.
+    /// </summary>
     public enum NetworkAction
     {
         /// <summary>
@@ -33,6 +39,11 @@
         /// <summary>
         /// Disconnect server from network.
         /// </summary>
-        RemoveNetwork = 6
+        RemoveNetwork = 6,
+
+        /// <summary>
+        /// Change the network bandwidth.
+        /// </summary>
+        EditNetworkBandwidth = 7
     }
 }

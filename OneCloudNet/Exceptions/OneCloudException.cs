@@ -5,23 +5,36 @@
     using System.Net;
     using RestSharp;
 
+    /// <summary>
+    /// Common 1Cloud API exception.
+    /// </summary>
+    [Serializable]
     public class OneCloudException : Exception
     {
+        /// <inheritdoc cref="Exception" />
         public OneCloudException()
         {
         }
 
-        public OneCloudException(string message) : base(message)
+        /// <inheritdoc cref="Exception" />
+        public OneCloudException(string message) 
+            : base(message)
         {
         }
     }
 
+    /// <summary>
+    /// REST related 1Cloud API exception.
+    /// </summary>
+    [Serializable]
     public class OneCloudRestException : OneCloudException
     {
+        /// <inheritdoc cref="Exception" />
         public OneCloudRestException()
         {
         }
 
+        /// <inheritdoc cref="Exception" />
         public OneCloudRestException(string message)
             : base(message)
         {
@@ -60,15 +73,16 @@
         /// The exception message in the format of "Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].
         /// </returns>
         /// </summary>
-	    public override String Message
-	    {
-		    get
-		    {
-			    return string.Format("Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].", 
+        public override string Message
+        {
+            get
+            {
+                return string.Format(
+                    "Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].", 
                     Response.StatusCode,
-                    String.Join(", ", ExpectedCodes.Select(code => Enum.GetName(typeof(HttpStatusCode), code))),
+                    string.Join(", ", ExpectedCodes.Select(code => Enum.GetName(typeof(HttpStatusCode), code))),
                     Response.Content);
-		    }
-	    }        
+            }
+        }
     }
 }

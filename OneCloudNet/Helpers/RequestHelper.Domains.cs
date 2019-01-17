@@ -1,13 +1,12 @@
 ﻿namespace OneCloudNet.Helpers
 {
-    using System;
     using RestSharp;
 
-    public partial class RequestHelper
+    internal partial class RequestHelper
     {
         #region Servers
 
-        public RestRequest CreateGetDomainsRequest()
+        internal RestRequest CreateGetDomainsRequest()
         {
             var request = new RestRequest(Method.GET);
             request.Resource = "/dns";
@@ -16,7 +15,7 @@
             return request;
         }
 
-        public IRestRequest CreateGetDomainRequest(int domainID)
+        internal IRestRequest CreateGetDomainRequest(int domainID)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = "/dns/{id}";
@@ -25,7 +24,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateDomainRequest(string name)
+        internal IRestRequest CreateCreateDomainRequest(string name)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns";
@@ -34,7 +33,7 @@
             return request;
         }
 
-        public IRestRequest CreateDeleteDomainRequest(int domainID)
+        internal IRestRequest CreateDeleteDomainRequest(int domainID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/dns/{id}";
@@ -43,7 +42,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateARecordRequest(int domainID, string ip, string name, string ttl)
+        internal IRestRequest CreateCreateARecordRequest(int domainID, string ip, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recorda";
@@ -55,7 +54,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateAAAARecordRequest(int domainID, string ip, string name, string ttl)
+        internal IRestRequest CreateCreateAAAARecordRequest(int domainID, string ip, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordaaaa";
@@ -67,7 +66,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateCNAMERecordRequest(int domainID, string name, string mnemonicName, string ttl)
+        internal IRestRequest CreateCreateCNAMERecordRequest(int domainID, string name, string mnemonicName, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordcname";
@@ -79,7 +78,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateMXRecordRequest(int domainID, string hostname, string priority, string ttl)
+        internal IRestRequest CreateCreateMXRecordRequest(int domainID, string hostname, string priority, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordmx";
@@ -91,7 +90,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateNSRecordRequest(int domainID, string hostname, string name, string ttl)
+        internal IRestRequest CreateCreateNSRecordRequest(int domainID, string hostname, string name, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordns";
@@ -103,7 +102,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateTXTRecordRequest(int domainID, string hostName, string text, string ttl)
+        internal IRestRequest CreateCreateTXTRecordRequest(int domainID, string hostName, string text, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordtxt";
@@ -115,7 +114,7 @@
             return request;
         }
 
-        public IRestRequest CreateDeleteRecordRequest(int domainID, int recordID)
+        internal IRestRequest CreateDeleteRecordRequest(int domainID, int recordID)
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = "/dns/{domainid}/{recordId}";
@@ -125,7 +124,7 @@
             return request;
         }
 
-        public IRestRequest CreateCreateSRVRecordRequest(int domainID, string service, string proto, string name, string priority, string weight, string port, string target, string ttl)
+        internal IRestRequest CreateCreateSRVRecordRequest(int domainID, string service, string proto, string name, string priority, string weight, string port, string target, string ttl)
         {
             var request = new RestRequest(Method.POST);
             request.Resource = "/dns/recordtxt";

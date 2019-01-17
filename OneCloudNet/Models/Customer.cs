@@ -1,7 +1,8 @@
 ﻿namespace OneCloudNet.Models
 {
-    using System;
-
+    /// <summary>
+    /// Contains the main info on Customer.
+    /// </summary>
     public class Customer
     {
         /// <summary>

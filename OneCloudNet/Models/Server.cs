@@ -1,13 +1,19 @@
 ﻿namespace OneCloudNet.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Contains the main info on Server.
+    /// </summary>
     public class Server
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Server" /> class.
+        /// </summary>
         public Server()
         {
             LinkedNetworks = new List<LinkedNetwork>();
+            LinkedSshKeys = new List<SSHKey>();
         }
 
         /// <summary>
@@ -82,6 +88,11 @@
         public string HDDType { get; set; }
 
         /// <summary>
+        /// IP address of the main network interface.
+        /// </summary>
+        public string PrimaryNetworkIp { get; set; }
+
+        /// <summary>
         /// List of connected networks.
         /// </summary>
         public List<LinkedNetwork> LinkedNetworks { get; set; }
@@ -95,14 +106,42 @@
         /// Type of server OS.
         /// </summary>
         public string ImageFamily { get; set; }
+
+        /// <summary>
+        /// List of associated SSH keys.
+        /// </summary>
+        public List<SSHKey> LinkedSshKeys { get; set; }
     }
 
-    public class LinkedNetwork
+    /// <summary>
+    /// Contains the main info on server's Linked Network.
+    /// </summary>
+    public class LinkedNetwork : Network
     {
+        /// <summary>
+        /// Unique connection ID.
+        /// </summary>
+        public int LinkID { get; set; }
+
         /// <summary>
         /// Network ID.
         /// </summary>
         public int NetworkID { get; set; }
+
+        /// <summary>
+        /// The state of connection.
+        /// </summary>
+        public string LinkState { get; set; }
+
+        /// <summary>
+        /// Network type.
+        /// </summary>
+        public string NetworkType { get; set; }
+
+        /// <summary>
+        /// Network name.
+        /// </summary>
+        public string NetworkName { get; set; }
 
         /// <summary>
         /// Server IP-address.

@@ -1,7 +1,8 @@
 ﻿namespace OneCloudNet.Models
 {
-    using System;
-
+    /// <summary>
+    /// Contains the main info on Data Center.
+    /// </summary>
     public class DC
     {
         /// <summary>
@@ -33,5 +34,15 @@
         /// Is high power device available.
         /// </summary>
         public bool IsEnableHighPool { get; set; }
+
+        /// <summary>
+        /// Is backup available.
+        /// </summary>
+        public bool IsEnableBackup { get; set; }
+
+        /// <summary>
+        /// Is IPv6 available.
+        /// </summary>
+        public bool IsEnableIpV6 { get; set; }
     }
 }
