@@ -2,6 +2,7 @@
 .Net client for 1cloud.ru service REST API.
 
 [![NuGet](https://img.shields.io/nuget/dt/onecloudnet.svg)](http://nuget.org/packages/OneCloudNet)
+[![AppVeyour](https://ci.appveyor.com/api/projects/status/xgt3uqfi2tcdx75v/branch/master?svg=true)](https://ci.appveyor.com/project/partyz0ne/onecloudnet/branch/master)
 
 ### Installation (NuGet)
 ```csharp
