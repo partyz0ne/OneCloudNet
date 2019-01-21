@@ -8,22 +8,22 @@
     public class PublicNetwork : PrivateNetwork
     {
         /// <summary>
-        /// Network address.
+        /// Gets or sets a network address.
         /// </summary>
         public string CIDR { get; set; }
 
         /// <summary>
-        /// External address of network gateway.
+        /// Gets or sets an external address of network gateway.
         /// </summary>
         public string EdgeExternalIp { get; set; }
 
         /// <summary>
-        /// Firewall properties.
+        /// Gets or sets a firewall properties.
         /// </summary>
         public Firewall Firewall { get; set; }
 
         /// <summary>
-        /// VPN properties.
+        /// Gets or sets VPN properties.
         /// </summary>
         public VPN Vpn { get; set; }
     }
@@ -34,7 +34,7 @@
     public class PrivateNetwork : Network
     {
         /// <summary>
-        /// Private network constructor.
+        /// Initializes a new instance of the <see cref="PrivateNetwork" /> class.
         /// </summary>
         public PrivateNetwork()
         {
@@ -62,7 +62,7 @@
         /// <summary>
         /// List of connected servers.
         /// </summary>
-        public List<LinkedServer> LinkedServers { get; set; }
+        public IEnumerable<LinkedServer> LinkedServers { get; set; }
 
         /// <summary>
         /// Flag whether the DHCP server exists.
@@ -153,7 +153,7 @@
         /// <summary>
         /// List of firewall rules.
         /// </summary>
-        public List<FirewallRule> Rules { get; set; }
+        public IEnumerable<FirewallRule> Rules { get; set; }
     }
 
     /// <summary>
@@ -218,7 +218,7 @@
         /// <summary>
         /// List of VPN tunnels.
         /// </summary>
-        public List<Tunnel> Tunnels { get; set; }
+        public IEnumerable<Tunnel> Tunnels { get; set; }
     }
 
     /// <summary>

@@ -6,8 +6,8 @@
     public class Customer
     {
         /// <summary>
-        /// Current billing balance.
+        /// Gets or sets current billing balance.
         /// </summary>
-        public double Balance { get; set; } 
+        public double Balance { get; set; }
     }
 }

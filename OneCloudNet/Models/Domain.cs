@@ -9,22 +9,22 @@
     public class Domain
     {
         /// <summary>
-        /// Unique ID.
+        /// Gets or sets unique ID.
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
-        /// Name of domain.
+        /// Gets or sets name of domain.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Technical name of domain.
+        /// Gets or sets technical name of domain.
         /// </summary>
         public string TechName { get; set; }
 
         /// <summary>
-        /// Curretn state.
+        /// Gets or sets current state.
         /// </summary>
         public string State { get; set; }
 
@@ -36,7 +36,7 @@
         /// <summary>
         /// List of domain records.
         /// </summary>
-        public List<DomainRecord> LinkedRecords { get; set; } 
+        public IEnumerable<DomainRecord> LinkedRecords { get; set; }
     }
 
     /// <summary>
@@ -92,7 +92,7 @@
         public string Weight { get; set; }
 
         /// <summary>
-        /// Port of workign service (for SRV-records).
+        /// Port of working service (for SRV-records).
         /// </summary>
         public string Port { get; set; }
 

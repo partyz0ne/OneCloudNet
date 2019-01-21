@@ -95,7 +95,7 @@
         /// <summary>
         /// List of connected networks.
         /// </summary>
-        public List<LinkedNetwork> LinkedNetworks { get; set; }
+        public IEnumerable<LinkedNetwork> LinkedNetworks { get; set; }
 
         /// <summary>
         /// Name of hosting data center.
@@ -110,7 +110,7 @@
         /// <summary>
         /// List of associated SSH keys.
         /// </summary>
-        public List<SSHKey> LinkedSshKeys { get; set; }
+        public IEnumerable<SSHKey> LinkedSshKeys { get; set; }
     }
 
     /// <summary>

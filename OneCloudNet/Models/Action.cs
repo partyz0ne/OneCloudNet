@@ -8,12 +8,12 @@
     public class Action
     {
         /// <summary>
-        /// Unique action ID.
+        /// Gets or sets unique action ID.
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
-        /// Action type. Can be one of these values:
+        /// Gets or sets an action type. Can be one of these values:
         ///   Create: server creation
         ///   Resize: server config changing
         ///   PowerOn: server power on
@@ -23,7 +23,7 @@
         public string Type { get; set; }
 
         /// <summary>
-        /// Action state. Can be one of these values:
+        /// Gets or sets an action state. Can be one of these values:
         /// InProgress: action is in progress
         /// Completed: action completed
         /// Postponed: action postponed
@@ -31,12 +31,12 @@
         public string State { get; set; }
 
         /// <summary>
-        /// The start date of an action.
+        /// Gets or sets the start date of an action.
         /// </summary>
         public DateTime StartDate { get; set; }
 
         /// <summary>
-        /// The finish date of an action.
+        /// Gets or sets the finish date of an action.
         /// </summary>
         public DateTime EndDate { get; set; }
     }

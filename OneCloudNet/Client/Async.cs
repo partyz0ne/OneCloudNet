@@ -269,84 +269,170 @@
 
         #region Servers
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Get list of servers.
+        /// </summary>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void GetServers(Action<List<Server>> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetServersRequest();
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient.GetServer" />
+        /// <summary>
+        /// Get server info by ID.
+        /// </summary>
+        /// <param name="serverID">Server unique ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void GetServer(int serverID, Action<Server> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetServerRequest(serverID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient.CreateServer" />
+        /// <summary>
+        /// Create new server.
+        /// </summary>
+        /// <param name="name">Server name.</param>
+        /// <param name="cpu">Number of CPU.</param>
+        /// <param name="ram">Volume of RAM (Mb).</param>
+        /// <param name="hdd">Hard disk space (Gb).</param>
+        /// <param name="imageID">Initial image ID.</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
+        /// <param name="dcLocation">Data center technical title.</param>
+        /// <param name="isBackupActive">Flag whether backup is active.</param>
+        /// <param name="backupPeriod">Backup depth (7, 14, 21, 28 days).</param>
+        /// <param name="sshKeys">List of related SSH keys IDs.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        /// <param name="networkID">Linked network ID.</param>
+        /// <param name="networkBandwidth">The network bandwidth.</param>
+        /// <param name="isNeedSysprep">The flag whether Windows preliminary work is necessary.</param>
         public void CreateServer(string name, int cpu, int ram, int hdd, string imageID, string hddType, bool isHighPerformance, string dcLocation, bool isBackupActive, int backupPeriod, List<int> sshKeys, Action<Server> success, Action<OneCloudException> failure, int? networkID = null, int? networkBandwidth = null, bool? isNeedSysprep = null)
         {
             var request = _requestHelper.CreateCreateServerRequest(name, cpu, ram, hdd, imageID, hddType, isHighPerformance, dcLocation, isBackupActive, backupPeriod, sshKeys, networkID, networkBandwidth, isNeedSysprep);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Change server configuration.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="cpu">Number of CPU.</param>
+        /// <param name="ram">Volume of RAM (Mb).</param>
+        /// <param name="hdd">Hard disk space (Gb).</param>
+        /// <param name="hddType">HDD type of server.</param>
+        /// <param name="isHighPerformance">True if server is located in highperformance pool.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void ChangeServer(int serverID, int cpu, int ram, int hdd, string hddType, bool isHighPerformance, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateChangeServerRequest(serverID, cpu, ram, hdd, hddType, isHighPerformance);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Delete server.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void DeleteServer(int serverID, Action<IRestResponse> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateDeleteServerRequest(serverID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Copy existing server to a new instance.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="name">New server instance name.</param>
+        /// <param name="networkID">Network ID to connect to.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void CopyServer(int serverID, string name, int networkID, Action<Server> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateCopyServerRequest(serverID, name, networkID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Rebuild the existing server.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="imageID">Image ID server is based on.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
+        /// <param name="isNeedSysprep">The flag whether Windows preliminary work is necessary.</param>
         public void RebuildServer(int serverID, int imageID, Action<Server> success, Action<OneCloudException> failure, bool? isNeedSysprep = null)
         {
             var request = _requestHelper.CreateRebuildServerRequest(serverID, imageID, isNeedSysprep);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Action for power server.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="type">Type of action.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void PowerServer(int serverID, Power type, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreatePowerServerRequest(serverID, type.ToString());
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Action for connecting/disconnecting server network.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="type">Type of action.</param>
+        /// <param name="networkID">Private network ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void ServerNetwork(int serverID, NetworkAction type, int networkID, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateServerNetworkRequest(serverID, type.ToString(), networkID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Change server's network bandwidth.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="networkLinkID">Server's linked network ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void ServerNetworkBandwidth(int serverID, int networkLinkID, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateServerNetworkBandwidthRequest(serverID, NetworkAction.EditNetworkBandwidth.ToString(), networkLinkID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Get list of active actions for server.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void GetActions(int serverID, Action<List<Action>> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetActionsRequest(serverID);
             ExecuteAsync(request, success, failure);
         }
 
-        /// <inheritdoc cref="IOneCloudNetClient" />
+        /// <summary>
+        /// Get information about action by ID.
+        /// </summary>
+        /// <param name="serverID">Server ID.</param>
+        /// <param name="actionID">Action ID.</param>
+        /// <param name="success">Callback for successful result.</param>
+        /// <param name="failure">Callback for failure.</param>
         public void GetAction(int serverID, int actionID, Action<Action> success, Action<OneCloudException> failure)
         {
             var request = _requestHelper.CreateGetActionRequest(serverID, actionID);

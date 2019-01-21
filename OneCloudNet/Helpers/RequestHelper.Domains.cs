@@ -2,6 +2,9 @@
 {
     using RestSharp;
 
+    /// <summary>
+    /// Helper class for creating OneCloudNet RestSharp Requests. Domains part.
+    /// </summary>
     internal partial class RequestHelper
     {
         #region Servers

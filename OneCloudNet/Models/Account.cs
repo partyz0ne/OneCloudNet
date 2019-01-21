@@ -26,7 +26,7 @@
         /// User e-mail.
         /// </summary>
         public string Email { get; set; }
-        
+
         /// <summary>
         /// Current billing balance.
         /// </summary>

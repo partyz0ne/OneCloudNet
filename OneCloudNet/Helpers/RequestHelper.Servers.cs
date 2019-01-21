@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using RestSharp;
 
+    /// <summary>
+    /// Helper class for creating OneCloudNet RestSharp Requests. Servers part.
+    /// </summary>
     internal partial class RequestHelper
     {
         internal RestRequest CreateGetServersRequest()

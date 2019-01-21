@@ -17,7 +17,7 @@
         #region Properties
 
         /// <summary>
-        /// Proxy settings.
+        /// Gets or sets proxy settings.
         /// </summary>
         IWebProxy Proxy { get; set; }
 
@@ -157,7 +157,7 @@
         void DeleteImage(int imageID, Action<IRestResponse> success, Action<OneCloudException> failure);
 
         #endregion
-        
+
         #region Private networks
 
         /// <summary>

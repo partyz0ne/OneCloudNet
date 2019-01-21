@@ -9,7 +9,7 @@
     <RepositoryType>git</RepositoryType>
     <Description>.Net client for 1cloud.ru service REST API.</Description>
     <Authors>Sergey Vychegzhanin, GitHub Community</Authors>
-    <Version>1.0.22</Version>
+    <Version>1.0.23</Version>
     <Optimize>false</Optimize>
     <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>
@@ -20,9 +20,20 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>1cloud onecloud 1cloud.ru api rest</PackageTags>
+	<CodeAnalysisRuleSet>ca.ruleset</CodeAnalysisRuleSet>
+	<AssemblyVersion>1.0.23.0</AssemblyVersion>
+	<FileVersion>1.0.23.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="RestSharp" Version="106.6.7" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

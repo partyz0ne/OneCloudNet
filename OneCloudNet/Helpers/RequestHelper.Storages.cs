@@ -2,6 +2,9 @@
 {
     using RestSharp;
 
+    /// <summary>
+    /// Helper class for creating OneCloudNet RestSharp Requests. Storages part.
+    /// </summary>
     internal partial class RequestHelper
     {
         internal IRestRequest CreateGetStorageRequest()

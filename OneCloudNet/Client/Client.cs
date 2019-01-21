@@ -33,7 +33,7 @@
         private RequestHelper _requestHelper;
 
         /// <summary>
-        /// Default Constructor for the OneCloudNetClient
+        /// Initializes a new instance of the <see cref="OneCloudNetClient" /> class.
         /// </summary>
         /// <param name="token">The token to use for the 1Cloud Requests</param>
         /// <param name="proxy">The proxy to use for web requests</param>
@@ -59,7 +59,8 @@
             _requestHelper = new RequestHelper(_token);
         }
 
-        private T Execute<T>(IRestRequest request) where T : new()
+        private T Execute<T>(IRestRequest request)
+            where T : new()
         {
             var response = _restClient.Execute<T>(request);
 

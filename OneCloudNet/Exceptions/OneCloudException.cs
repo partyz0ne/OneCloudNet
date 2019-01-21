@@ -1,23 +1,30 @@
 ﻿namespace OneCloudNet.Exceptions
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Net;
     using RestSharp;
 
+#pragma warning disable CA1032 // Implement standard exception constructors
+#pragma warning disable CA2237 // Mark ISerializable types with serializable
     /// <summary>
     /// Common 1Cloud API exception.
     /// </summary>
-    [Serializable]
     public class OneCloudException : Exception
     {
-        /// <inheritdoc cref="Exception" />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OneCloudException" /> class.
+        /// </summary>
         public OneCloudException()
         {
         }
 
-        /// <inheritdoc cref="Exception" />
-        public OneCloudException(string message) 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OneCloudException" /> class.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        public OneCloudException(string message)
             : base(message)
         {
         }
@@ -26,22 +33,26 @@
     /// <summary>
     /// REST related 1Cloud API exception.
     /// </summary>
-    [Serializable]
     public class OneCloudRestException : OneCloudException
     {
-        /// <inheritdoc cref="Exception" />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OneCloudRestException" /> class.
+        /// </summary>
         public OneCloudRestException()
         {
         }
 
-        /// <inheritdoc cref="Exception" />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OneCloudRestException" /> class.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
         public OneCloudRestException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        /// Creates a OneCloudRestException with the rest response which caused the exception, and the status codes which were expected. 
+        /// Initializes a new instance of the <see cref="OneCloudRestException" /> class.
         /// </summary>
         /// <param name="r">Rest Response which was not expected.</param>
         /// <param name="expectedCodes">The expected status codes which were not found.</param>
@@ -58,17 +69,17 @@
         public HttpStatusCode StatusCode { get; set; }
 
         /// <summary>
-        /// Expected status codes to have seen instead of the one recieved. 
+        /// Expected status codes to have seen instead of the one received.
         /// </summary>
-        public HttpStatusCode[] ExpectedCodes { get; private set; }
+        public HttpStatusCode[] ExpectedCodes { get; }
 
         /// <summary>
         /// The response of the error call (for Debugging use)
         /// </summary>
-        public IRestResponse Response { get; private set; }
+        public IRestResponse Response { get; }
 
         /// <summary>
-        /// Overridden message for 1Cloud Exception. 
+        /// Overridden message for 1Cloud Exception.
         /// <returns>
         /// The exception message in the format of "Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].
         /// </returns>
@@ -78,11 +89,14 @@
             get
             {
                 return string.Format(
-                    "Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].", 
+                    CultureInfo.InvariantCulture,
+                    "Received Response [{0}] : Expected to see [{1}]. The HTTP response was [{2}].",
                     Response.StatusCode,
                     string.Join(", ", ExpectedCodes.Select(code => Enum.GetName(typeof(HttpStatusCode), code))),
                     Response.Content);
             }
         }
     }
+#pragma warning restore CA1032 // Implement standard exception constructors
+#pragma warning restore CA2237 // Mark ISerializable types with serializable
 }

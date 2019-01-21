@@ -2,6 +2,9 @@
 {
     using RestSharp;
 
+    /// <summary>
+    /// Helper class for creating OneCloudNet RestSharp Requests. Networks part.
+    /// </summary>
     internal partial class RequestHelper
     {
         #region Private networks
